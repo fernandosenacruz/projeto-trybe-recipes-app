@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 const Provider = ({ children }) => {
-  const [recipeList, setRecipeList] = useState();
-  const CONTEXT_VALUE = [recipeList, setRecipeList];
+  const [recipeList, setRecipeList] = useState([]);
+  const CONTEXT_VALUE = { recipeList, setRecipeList };
   return (
     <RecipesContext.Provider value={ CONTEXT_VALUE }>
       {children}
@@ -13,7 +13,7 @@ const Provider = ({ children }) => {
 };
 
 Provider.propTypes = {
-  children: PropTypes.objectOf({}).isRequired,
+  children: PropTypes.objectOf(Object).isRequired,
 };
 
 export default Provider;

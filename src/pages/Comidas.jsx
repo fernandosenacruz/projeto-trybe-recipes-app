@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
+import RecipesContext from '../context/RecipesContext';
 import getRecipes from '../services/getRecipes';
 
 function Comidas() {
@@ -9,14 +10,13 @@ function Comidas() {
   const NUMBER_OF_CATEGORIES = 5;
   const recipesEndpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const categoryEndpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-  const [recipes, setRecipes] = useState([]);
+  const { recipeList, setRecipeList } = useContext(RecipesContext);
   const [categories, setCategories] = useState([]);
   const [filtered, setFiltered] = useState('');
 
   async function getRecipesAPI() {
     const meals = await getRecipes(NUMBER_OF_RECIPES, recipesEndpoint);
-    setRecipes(meals);
-    console.log(meals);
+    setRecipeList(meals);
     const cat = await getRecipes(NUMBER_OF_CATEGORIES, categoryEndpoint);
     setCategories(cat);
   }
@@ -29,7 +29,7 @@ function Comidas() {
       setFiltered(category);
     }
     const rcp = await getRecipes(NUMBER_OF_RECIPES, filterEndPoint);
-    setRecipes(rcp);
+    setRecipeList(rcp);
   }
 
   useEffect(() => {
@@ -57,11 +57,9 @@ function Comidas() {
       >
         All
       </button>
-      {recipes.map((recipe, index) => (<RecipeCard
+      {recipeList.map((recipe, index) => (<RecipeCard
         key={ index + recipe.strMeal }
-        img={ recipe.strMealThumb }
-        name={ recipe.strMeal }
-        id={ recipe.idMeal }
+        recipe={ recipe }
         index={ index }
       />))}
       <Footer />
