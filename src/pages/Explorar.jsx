@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "../components/Header";
+import React from 'react';
+import Header from '../components/Header';
 
-function Explorar(){
-    return(
-        <Header name="Explorar"/>
-    )
+function Explorar() {
+  return (
+    <Header name="Explorar" />
+  );
 }
 
 export default Explorar;

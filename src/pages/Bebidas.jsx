@@ -1,10 +1,10 @@
-import React from "react";
-import Header from "../components/Header";
+import React from 'react';
+import Header from '../components/Header';
 
-function Bebidas(){
-    return(
-        <Header name="Bebidas"/>
-    )
+function Bebidas() {
+  return (
+    <Header name="Bebidas" />
+  );
 }
 
 export default Bebidas;

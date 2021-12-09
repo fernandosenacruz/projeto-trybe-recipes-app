@@ -1,11 +1,9 @@
-import React from "react";
-import Header from "../components/Header";
+import React from 'react';
 
-function ComidasInProgress(){
-    return(
-        <>
-        </>
-    )
+function ComidasInProgress() {
+  return (
+    <h1>Bebidas em Processo</h1>
+  );
 }
 
 export default ComidasInProgress;
