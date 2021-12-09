@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
@@ -25,7 +26,7 @@ function Comidas() {
         name={ recipe.strMeal }
         index={ index }
       />))}
-
+      <Footer />
     </div>
   );
 }

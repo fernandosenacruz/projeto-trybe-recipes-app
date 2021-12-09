@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
@@ -18,14 +19,14 @@ function Bebidas() {
   }, []);
   return (
     <div>
-      <Header name="Comidas" />
+      <Header name="Bebidas" />
       {recipes.map((recipe, index) => (<RecipeCard
         key={ index + recipe.strDrink }
         img={ recipe.strDrinkThumb }
         name={ recipe.strDrink }
         index={ index }
       />))}
-
+      <Footer />
     </div>
   );
 }
