@@ -4,10 +4,10 @@ import Header from '../components/Header';
 
 function Comidas() {
   return (
-    <>
+    <div>
       <Header name="Comidas" />
       <Footer />
-    </>
+    </div>
   );
 }
 

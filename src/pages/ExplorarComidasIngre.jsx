@@ -3,7 +3,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-function ExplorarComidasIngre(){
+function ExplorarComidasIngre() {
   return (
     <>
       <Header name="Comidas Ingredientes" />

@@ -10,6 +10,13 @@
   width: 100%;
 }
 
+.Footer {
+  bottom: 0;
+  position: fixed;
+  width: 90%;
+  text-align: center;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
