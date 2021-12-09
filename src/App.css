@@ -15,6 +15,32 @@
   max-height: 80vh;
 }
 
+.header{
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(41, 128, 77);
+}
+
+.prof-btn{
+  background-color: rgb(41, 128, 77);
+  border:none;
+  cursor: pointer;
+}
+
+.search-btn{
+  background-color: rgb(41, 128, 77);
+  border:none;
+}
+
+.search-input{
+  margin-top: 20px;
+  height: 30px;
+  width: 250px;
+  outline: none;
+  border: none;
+  padding: 5px;
+  border-radius: 30px;
+}
 /*
 #iceLeft {
   animation: clink .8s infinite ease;
