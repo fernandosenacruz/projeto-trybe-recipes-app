@@ -19,13 +19,14 @@ function Header({ name }) {
   }
 
   return (
-    <header data-testid="profile-top-btn" className="header">
+    <header className="header">
       <button
         className="prof-btn"
         type="button"
         onClick={ () => history.push('/perfil') }
       >
         <img
+          data-testid="profile-top-btn"
           src={ profileIcon }
           alt="imagem do perfil"
         />
@@ -43,10 +44,13 @@ function Header({ name }) {
       <button
         className="search-btn"
         type="button"
-        data-testid="search-top-btn"
         onClick={ handleClick }
       >
-        <img width="14" src={ searchIcon } alt="Search" />
+        <img
+          data-testid="search-top-btn"
+          src={ searchIcon }
+          alt="Search"
+        />
       </button>
     </header>
   );
