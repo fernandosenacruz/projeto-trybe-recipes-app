@@ -4,7 +4,9 @@ import '../App.css';
 
 function RecipeCard({ img, name, index }) {
   return (
-    <div data-testid={ `${index}-recipe-card` }>
+    <div
+      data-testid={ `${index}-recipe-card` }
+    >
       <h4 data-testid={ `${index}-card-name` }>{name}</h4>
       <img
         src={ img }
