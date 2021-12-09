@@ -13,8 +13,8 @@
 .Footer {
   bottom: 0;
   position: fixed;
-  width: 90%;
   text-align: center;
+  width: 90%;
 }
 
 .rocksGlass {
@@ -22,32 +22,33 @@
   max-height: 80vh;
 }
 
-.header{
+.header {
+  background-color: rgb(41, 128, 77);
   display: flex;
   justify-content: space-evenly;
-  background-color: rgb(41, 128, 77);
 }
 
-.prof-btn{
+.prof-btn {
   background-color: rgb(41, 128, 77);
-  border:none;
+  border: none;
   cursor: pointer;
 }
 
-.search-btn{
+.search-btn {
   background-color: rgb(41, 128, 77);
-  border:none;
+  border: none;
 }
 
-.search-input{
-  margin-top: 20px;
-  height: 30px;
-  width: 250px;
-  outline: none;
+.search-input {
   border: none;
-  padding: 5px;
   border-radius: 30px;
+  height: 30px;
+  margin-top: 20px;
+  outline: none;
+  padding: 5px;
+  width: 250px;
 }
+
 /*
 #iceLeft {
   animation: clink .8s infinite ease;
