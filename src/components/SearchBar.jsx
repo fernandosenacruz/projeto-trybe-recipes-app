@@ -8,89 +8,55 @@ const SearchBar = ({ textToSearch }) => {
   const { setRecipeList } = useContext(RecipesContext);
   const [searchType, setSearchType] = useState('');
 
-  const fetchByIngredient = async () => {
-    const isDrinkRoute = location.pathname.includes('bebidas');
-    const endpoint = `https://www.${
-      isDrinkRoute ? 'thecocktaildb' : 'themealdb'
-    }.com/api/json/v1/1/filter.php?i=${textToSearch}`;
-    const response = await fetch(endpoint);
-    try {
-      const data = await response.json();
-      if (isDrinkRoute && data.drinks.length === 1) {
-        history.push(`/bebidas/${data.drinks[0].idDrink}`);
-      }
-      if (!isDrinkRoute && data.meals.length === 1) {
-        history.push(`/comidas/${data.meals[0].idMeal}`);
-      }
-      setRecipeList(data.drinks || data.meals);
-    } catch (error) {
-      global.alert(
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-      );
-    }
-  };
-
-  const fetchByName = async () => {
-    const isDrinkRoute = location.pathname.includes('bebidas');
-    const endpoint = `https://www.${
-      isDrinkRoute ? 'thecocktaildb' : 'themealdb'
-    }.com/api/json/v1/1/search.php?s=${textToSearch}`;
-    const response = await fetch(endpoint);
-    try {
-      const data = await response.json();
-      if (isDrinkRoute && data.drinks.length === 1) {
-        history.push(`/bebidas/${data.drinks[0].idDrink}`);
-      }
-      if (!isDrinkRoute && data.meals.length === 1) {
-        history.push(`/comidas/${data.meals[0].idMeal}`);
-      }
-      setRecipeList(data.drinks || data.meals);
-    } catch (error) {
-      global.alert(
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-      );
-    }
-  };
-
-  const fetchByFirstLetter = async () => {
-    const isDrinkRoute = location.pathname.includes('bebidas');
-    if (textToSearch.length > 1) {
-      global.alert('Sua busca deve conter somente 1 (um) caracter');
-    }
-    const endpoint = `https://www.${
-      isDrinkRoute ? 'thecocktaildb' : 'themealdb'
-    }.com/api/json/v1/1/search.php?f=${textToSearch}`;
-    const response = await fetch(endpoint);
-    try {
-      const data = await response.json();
-      if (isDrinkRoute && data.drinks.length === 1) {
-        history.push(`/bebidas/${data.drinks[0].idDrink}`);
-      }
-      if (!isDrinkRoute && data.meals.length === 1) {
-        history.push(`/comidas/${data.meals[0].idMeal}`);
-      }
-      setRecipeList(data.drinks || data.meals);
-    } catch (error) {
-      global.alert(
-        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
-      );
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (searchType === 'f' && textToSearch.length > 1) {
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
+      return 0;
+    }
+    const isDrinkRoute = location.pathname.includes('bebidas');
+    const siteDomain = isDrinkRoute ? 'thecocktaildb' : 'themealdb';
+    let endPoint;
     switch (searchType) {
     case 'i':
-      fetchByIngredient();
+      endPoint = `https://www.${siteDomain}.com/api/json/v1/1/filter.php?i=${textToSearch}`;
       break;
     case 's':
-      fetchByName();
+      endPoint = `https://www.${siteDomain}.com/api/json/v1/1/search.php?s=${textToSearch}`;
       break;
+
     case 'f':
-      fetchByFirstLetter();
+      endPoint = `https://www.${siteDomain}.com/api/json/v1/1/search.php?f=${textToSearch}`;
       break;
+
     default:
       break;
+    }
+
+    const response = await fetch(endPoint);
+    try {
+      let recipes = [];
+      const data = await response.json();
+      console.log(isDrinkRoute);
+      if (isDrinkRoute) {
+        if (data.drinks.length === 1) {
+          history.push(`/bebidas/${data.drinks[0].idDrink}`);
+        }
+        recipes = data.drinks.filter((drink, index) => index <= 11 && drink);
+      }
+      if (!isDrinkRoute) {
+        if (data.meals.length === 1) {
+          history.push(`/comidas/${data.meals[0].idMeal}`);
+        }
+        recipes = data.meals.filter((drink, index) => index <= 11 && drink);
+      }
+      console.log(recipes);
+      setRecipeList(recipes);
+    } catch (error) {
+      console.error(error);
+      global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
     }
   };
 
