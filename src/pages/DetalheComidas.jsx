@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
+import '../App.css';
 
 function ComidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -23,7 +24,8 @@ function ComidasDetalhes(props) {
     entries.forEach((entry) => {
       if (entry[0].indexOf('Ingredient')
       !== NOT_FOUND
-      && entry[1] !== '') {
+      && entry[1] !== ''
+      && entry[1] !== null) {
         newIngredients.push(entry[1]);
       }
     });
@@ -35,7 +37,7 @@ function ComidasDetalhes(props) {
     entries.forEach((entry) => {
       if (entry[0].indexOf('Measure')
       !== NOT_FOUND
-      && entry[1] !== '') {
+      && entry[1] !== ' ') {
         newMeasures.push(entry[1]);
       }
     });
@@ -60,7 +62,12 @@ function ComidasDetalhes(props) {
     strMeal: name, strCategory, strInstructions } = recipe;
   return (
     <div>
-      <img src={ `${imgSrc}` } alt={ `${name}` } data-testid="recipe-photo" />
+      <img
+        src={ `${imgSrc}` }
+        alt={ `${name}` }
+        data-testid="recipe-photo"
+        className="detail-img"
+      />
       <h2 data-testid="recipe-title">{name}</h2>
       <button data-testid="share-btn" type="button">share</button>
       <button data-testid="favorite-btn" type="button">Fav</button>
@@ -89,7 +96,13 @@ function ComidasDetalhes(props) {
         index={ index }
         recomend
       />))}
-      <button type="button" data-testid="start-recipe-btn"> Iniciar Receita</button>
+      <button
+        className="start-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
 
     </div>
 

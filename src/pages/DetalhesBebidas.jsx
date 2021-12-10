@@ -58,7 +58,12 @@ function BebidasDetalhes(props) {
     strDrink: name, strAlcoholic, strInstructions } = recipe;
   return (
     <div>
-      <img src={ `${imgSrc}` } alt={ `${name}` } data-testid="recipe-photo" />
+      <img
+        src={ `${imgSrc}` }
+        alt={ `${name}` }
+        data-testid="recipe-photo"
+        className="detail-img"
+      />
       <h2 data-testid="recipe-title">{name}</h2>
       <button data-testid="share-btn" type="button">share</button>
       <button data-testid="favorite-btn" type="button">Fav</button>
@@ -80,7 +85,13 @@ function BebidasDetalhes(props) {
         index={ index }
         recomend
       />))}
-      <button type="button" data-testid="start-recipe-btn"> Iniciar Receita</button>
+      <button
+        className="start-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
 
     </div>
 
