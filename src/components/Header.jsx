@@ -5,16 +5,16 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import '../App.css';
 
-function Header({ name }) {
+function Header({ name, show }) {
   const history = useHistory();
 
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   function handleClick() {
-    if (hidden === true) {
-      setHidden(false);
-    } else {
+    if (hidden === false) {
       setHidden(true);
+    } else {
+      setHidden(false);
     }
   }
 
@@ -34,30 +34,41 @@ function Header({ name }) {
       <h1 data-testid="page-title">
         { name }
       </h1>
-      <input
-        className="search-input"
-        type="text"
-        name=""
-        data-testid="search-input"
-        hidden={ hidden }
-      />
-      <button
-        className="search-btn"
-        type="button"
-        onClick={ handleClick }
-      >
-        <img
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          alt="Search"
-        />
-      </button>
+      {
+        hidden
+          ? (
+            <input
+              className="search-input"
+              type="text"
+              data-testid="search-input"
+            />)
+          : undefined
+      }
+
+      {
+        show === 'true'
+          ? (
+            <button
+              className="search-btn"
+              type="button"
+              onClick={ handleClick }
+            >
+              <img
+                data-testid="search-top-btn"
+                src={ searchIcon }
+                alt="Search"
+              />
+            </button>
+          )
+          : undefined
+      }
     </header>
   );
 }
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
+  show: PropTypes.bool.isRequired,
 };
 
 export default Header;
