@@ -35,9 +35,10 @@ function Comidas() {
   useEffect(() => {
     getRecipesAPI();
   }, []);
+
   return (
     <div>
-      <Header name="Comidas" />
+      <Header name="Comidas" show="true" />
       {categories.map((cat, index) => (
         <button
           key={ index + cat.strCategory }
