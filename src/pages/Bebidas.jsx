@@ -38,7 +38,7 @@ function Bebidas() {
 
   return (
     <div>
-      <Header name="Bebidas" />
+      <Header name="Bebidas" show="true" />
       {categories.map((cat, index) => (
         <button
           key={ index }

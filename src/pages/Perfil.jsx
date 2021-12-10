@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function Perfil() {
   return (
     <>
-      <Header name="Perfil" />
+      <Header name="Perfil" show="false" />
       <Footer />
     </>
   );

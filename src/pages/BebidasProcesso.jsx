@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ComidasInProgress() {
+function BebidasProcesso() {
   return (
     <h1>Bebidas em Processo</h1>
   );
 }
 
-export default ComidasInProgress;
+export default BebidasProcesso;
