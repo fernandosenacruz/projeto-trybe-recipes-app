@@ -6,7 +6,7 @@ import Header from '../components/Header';
 function ExplorarComidasIngre() {
   return (
     <>
-      <Header name="Comidas Ingredientes" />
+      <Header name="Explorar Ingredientes" show="false" />
       <Footer />
     </>
   );

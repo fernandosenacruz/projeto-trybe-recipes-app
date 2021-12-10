@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import RecipersContext from '../context/RecipesContext';
+import RecipesContext from '../context/RecipesContext';
 
 const SearchBar = ({ textToSearch }) => {
   const location = useLocation();
   const history = useHistory();
-  const [recipeList, setRecipeList] = useContext(RecipersContext);
-
+  const { setRecipeList } = useContext(RecipesContext);
   const [searchType, setSearchType] = useState('');
 
   const fetchByIngredient = async () => {
@@ -14,12 +13,20 @@ const SearchBar = ({ textToSearch }) => {
     const endpoint = `https://www.${
       isDrinkRoute ? 'thecocktaildb' : 'themealdb'
     }.com/api/json/v1/1/filter.php?i=${textToSearch}`;
-    const response = await fetch(endpoint).then((d) => d.json());
-    if (isDrinkRoute && response.drinks.length === 1) {
-      history.push(`/bebidas/${response.drinks[0].idDrink}`);
-    }
-    if (response.meals.length === 1) {
-      history.push(`/comidas/${response.meals[0].idMeal}`);
+    const response = await fetch(endpoint);
+    try {
+      const data = await response.json();
+      if (isDrinkRoute && data.drinks.length === 1) {
+        history.push(`/bebidas/${data.drinks[0].idDrink}`);
+      }
+      if (!isDrinkRoute && data.meals.length === 1) {
+        history.push(`/comidas/${data.meals[0].idMeal}`);
+      }
+      setRecipeList(data.drinks || data.meals);
+    } catch (error) {
+      global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
     }
   };
 
@@ -28,12 +35,20 @@ const SearchBar = ({ textToSearch }) => {
     const endpoint = `https://www.${
       isDrinkRoute ? 'thecocktaildb' : 'themealdb'
     }.com/api/json/v1/1/search.php?s=${textToSearch}`;
-    const response = await fetch(endpoint).then((d) => d.json());
-    if (isDrinkRoute && response.drinks.length === 1) {
-      history.push(`/bebidas/${response.drinks[0].idDrink}`);
-    }
-    if (response.meals.length === 1) {
-      history.push(`/comidas/${response.meals[0].idMeal}`);
+    const response = await fetch(endpoint);
+    try {
+      const data = await response.json();
+      if (isDrinkRoute && data.drinks.length === 1) {
+        history.push(`/bebidas/${data.drinks[0].idDrink}`);
+      }
+      if (!isDrinkRoute && data.meals.length === 1) {
+        history.push(`/comidas/${data.meals[0].idMeal}`);
+      }
+      setRecipeList(data.drinks || data.meals);
+    } catch (error) {
+      global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
     }
   };
 
@@ -45,34 +60,42 @@ const SearchBar = ({ textToSearch }) => {
     const endpoint = `https://www.${
       isDrinkRoute ? 'thecocktaildb' : 'themealdb'
     }.com/api/json/v1/1/search.php?f=${textToSearch}`;
-    const response = await fetch(endpoint).then((d) => d.json());
-    if (isDrinkRoute && response.drinks.length === 1) {
-      history.push(`/bebidas/${response.drinks[0].idDrink}`);
-    }
-    if (response.meals.length === 1) {
-      history.push(`/comidas/${response.meals[0].idMeal}`);
+    const response = await fetch(endpoint);
+    try {
+      const data = await response.json();
+      if (isDrinkRoute && data.drinks.length === 1) {
+        history.push(`/bebidas/${data.drinks[0].idDrink}`);
+      }
+      if (!isDrinkRoute && data.meals.length === 1) {
+        history.push(`/comidas/${data.meals[0].idMeal}`);
+      }
+      setRecipeList(data.drinks || data.meals);
+    } catch (error) {
+      global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (searchType) {
-      case 'i':
-        fetchByIngredient();
-        break;
-      case 's':
-        fetchByName();
-        break;
-      case 'f':
-        fetchByFirstLetter();
-        break;
-      default:
-        break;
+    case 'i':
+      fetchByIngredient();
+      break;
+    case 's':
+      fetchByName();
+      break;
+    case 'f':
+      fetchByFirstLetter();
+      break;
+    default:
+      break;
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={ handleSubmit }>
       <div className="control">
         <label className="radio" htmlFor="ingredient">
           <input
@@ -80,7 +103,7 @@ const SearchBar = ({ textToSearch }) => {
             name="answer"
             id="ingredient"
             data-testid="ingredient-search-radio"
-            onClick={() => setSearchType('i')}
+            onClick={ () => setSearchType('i') }
           />
           Ingredientes
         </label>
@@ -90,7 +113,7 @@ const SearchBar = ({ textToSearch }) => {
             name="answer"
             id="name"
             data-testid="name-search-radio"
-            onClick={() => setSearchType('s')}
+            onClick={ () => setSearchType('s') }
           />
           Nome
         </label>
@@ -100,7 +123,7 @@ const SearchBar = ({ textToSearch }) => {
             name="answer"
             id="firt-letter"
             data-testid="first-letter-search-radio"
-            onClick={() => setSearchType('f')}
+            onClick={ () => setSearchType('f') }
           />
           Primeira letra
         </label>

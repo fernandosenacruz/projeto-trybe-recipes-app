@@ -2,15 +2,15 @@ import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
-import BebidasProgresso from './pages/BebidasProgresso';
-import ComidasProgresso from './pages/ComidasProgresso';
+import BebidasProcesso from './pages/BebidasProcesso';
+import ComidasProcesso from './pages/ComidasProcesso';
 import DetalheComida from './pages/DetalheComidas';
 import Explorar from './pages/Explorar';
 import ExplorarComidas from './pages/ExplorarComidas';
 import ExplorarBebidasIngre from './pages/ExplorarBebidasIngre';
 import ExplorarComidasIngre from './pages/ExplorarComidasIngre';
 import ExplorarComidasArea from './pages/ExplorarComidasArea';
-import ReceitasFavoritadas from './pages/ReceitasFavoritadas';
+import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ExplorarBebidas from './pages/ExplorarBebidas';
 import DetalhesBebida from './pages/DetalhesBebidas';
@@ -38,12 +38,12 @@ function App() {
         <Route
           exact
           path="/comidas/{id-da-receita}/in-progress"
-          component={ComidasProgresso}
+          component={ComidasProcesso}
         />
         <Route
           exact
           path="/bebidas/{id-da-receita}/in-progress"
-          component={BebidasProgresso}
+          component={BebidasProcesso}
         />
         <Route exact path="/explorar" component={Explorar} />
         <Route exact path="/explorar/comidas" component={ExplorarComidas} />
@@ -65,11 +65,7 @@ function App() {
         />
         <Route exact path="/perfil" component={Perfil} />
         <Route exact path="/receitas-feitas" component={ReceitasFeitas} />
-        <Route
-          exact
-          path="/receitas-favoritadas"
-          component={ReceitasFavoritadas}
-        />
+        <Route exact path="/receitas-favoritas" component={ReceitasFavoritas} />
       </Switch>
     </BrowserRouter>
   );

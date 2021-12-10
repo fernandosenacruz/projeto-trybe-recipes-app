@@ -5,7 +5,7 @@ import Header from '../components/Header';
 function Explorar() {
   return (
     <div>
-      <Header name="Explorar" />
+      <Header name="Explorar" show="false" />
       <Footer />
     </div>
   );
