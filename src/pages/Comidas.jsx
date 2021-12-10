@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -32,9 +32,9 @@ function Comidas() {
     setRecipeList(rcp);
   }
 
-  useEffect(() => {
+  if (recipeList.length === 0) {
     getRecipesAPI();
-  }, []);
+  }
 
   return (
     <div>
