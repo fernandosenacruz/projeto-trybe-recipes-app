@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 
@@ -7,7 +8,7 @@ const SearchBar = ({ textToSearch }) => {
   const history = useHistory();
   const { setRecipeList } = useContext(RecipesContext);
   const [searchType, setSearchType] = useState('');
-
+  const MAX_RECIPES = 12;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (searchType === 'f' && textToSearch.length > 1) {
@@ -42,13 +43,13 @@ const SearchBar = ({ textToSearch }) => {
         if (data.drinks.length === 1) {
           history.push(`/bebidas/${data.drinks[0].idDrink}`);
         }
-        recipes = data.drinks.filter((drink, index) => index <= 11 && drink);
+        recipes = data.drinks.filter((drink, index) => index <= MAX_RECIPES && drink);
       }
       if (!isDrinkRoute) {
         if (data.meals.length === 1) {
           history.push(`/comidas/${data.meals[0].idMeal}`);
         }
-        recipes = data.meals.filter((drink, index) => index <= 11 && drink);
+        recipes = data.meals.filter((drink, index) => index <= MAX_RECIPES && drink);
       }
       console.log(recipes);
       setRecipeList(recipes);
@@ -99,5 +100,9 @@ const SearchBar = ({ textToSearch }) => {
       </div>
     </form>
   );
+};
+
+SearchBar.propTypes = {
+  textToSearch: PropTypes.string.isRequired,
 };
 export default SearchBar;

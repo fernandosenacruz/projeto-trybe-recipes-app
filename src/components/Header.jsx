@@ -47,7 +47,12 @@ function Header({ name, show }) {
       {!hidden && <SearchBar textToSearch={ textToSearch } />}
 
       {show === 'true' ? (
-        <button className="search-btn" type="button" onClick={ handleClick } data-testid="search-btn">
+        <button
+          className="search-btn"
+          type="button"
+          onClick={ handleClick }
+          data-testid="search-btn"
+        >
           <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
         </button>
       ) : undefined}
