@@ -1,65 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
 import '../App.css';
+import StartRecipeButton from '../components/StartRecipeButton';
 
 function ComidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
   const NUMEBR_OF_RECOMENDATIONS = 6;
-  const NOT_FOUND = -1;
   const { match } = props;
   const { id } = match.params;
-  const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const recomendationEndPoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const [recipe, setRecipe] = useState([]);
   const [embedYt, setEmbedYt] = useState([]);
   const [ingredientsList, setIngredientsList] = useState([]);
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
 
-  function getIngredients(rcp) {
-    const entries = Object.entries(rcp);
-    const newIngredients = [];
-    entries.forEach((entry) => {
-      if (entry[0].indexOf('Ingredient')
-      !== NOT_FOUND
-      && entry[1] !== ''
-      && entry[1] !== null) {
-        newIngredients.push(entry[1]);
-      }
-    });
-    setIngredientsList(newIngredients);
-  }
-  function getMeasures(rcp) {
-    const entries = Object.entries(rcp);
-    const newMeasures = [];
-    entries.forEach((entry) => {
-      if (entry[0].indexOf('Measure')
-      !== NOT_FOUND
-      && entry[1] !== ' ') {
-        newMeasures.push(entry[1]);
-      }
-    });
-    setMeasureList(newMeasures);
+  useEffect(() => {
+    function getIngredients(rcp) {
+      const NOT_FOUND = -1;
+      const entries = Object.entries(rcp);
+      const newIngredients = [];
+      entries.forEach((entry) => {
+        if (entry[0].indexOf('Ingredient')
+        !== NOT_FOUND
+        && entry[1] !== ''
+        && entry[1] !== null) {
+          newIngredients.push(entry[1]);
+        }
+      });
+      setIngredientsList(newIngredients);
+    }
+
+    function getMeasures(rcp) {
+      const NOT_FOUND = -1;
+      const entries = Object.entries(rcp);
+      const newMeasures = [];
+      entries.forEach((entry) => {
+        if (entry[0].indexOf('Measure')
+        !== NOT_FOUND
+        && entry[1] !== ' ') {
+          newMeasures.push(entry[1]);
+        }
+      });
+      setMeasureList(newMeasures);
+    }
+
+    async function fetchRecipe() {
+      const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const recomendationEndPoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const rcp = await getRecipes(NUMBER_OF_RECIPES, endPoint);
+      const recip = rcp[0];
+      setRecipe(recip);
+      setEmbedYt(recip.strYoutube.replace('watch?v=', 'embed/'));
+      getIngredients(recip);
+      getMeasures(recip);
+      const drinks = await getRecipes(NUMEBR_OF_RECOMENDATIONS, recomendationEndPoint);
+      setRecomended(drinks);
+    }
+
+    fetchRecipe();
+  }, [id]);
+
+  function renderButton(recp) {
+    if (typeof recp === 'object' && !Array.isArray(recp)) {
+      console.log(typeof recp);
+      return <StartRecipeButton recipe={ recipe } id={ id } />;
+    }
   }
 
-  async function fetchRecipe() {
-    const rcp = await getRecipes(NUMBER_OF_RECIPES, endPoint);
-    const recip = rcp[0];
-    setRecipe(recip);
-    setEmbedYt(recip.strYoutube.replace('watch?v=', 'embed/'));
-    getIngredients(recip);
-    getMeasures(recip);
-    const drinks = await getRecipes(NUMEBR_OF_RECOMENDATIONS, recomendationEndPoint);
-    setRecomended(drinks);
-  }
-  if (recipe.length === 0) {
-    fetchRecipe();
-  }
   console.log(recipe);
   const { strMealThumb: imgSrc,
     strMeal: name, strCategory, strInstructions } = recipe;
+
   return (
     <div>
       <img
@@ -96,13 +109,7 @@ function ComidasDetalhes(props) {
         index={ index }
         recomend
       />))}
-      <button
-        className="start-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      {renderButton(recipe)}
 
     </div>
 
