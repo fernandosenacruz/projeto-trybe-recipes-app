@@ -62,7 +62,7 @@ function Header({ name, show }) {
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.string.isRequired,
 };
 
 export default Header;
