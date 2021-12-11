@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import '../App.css';
+import SearchBar from './SearchBar';
 
 function Header({ name, show }) {
   const history = useHistory();
 
-  const [hidden, setHidden] = useState(false);
+  const [hidden, setHidden] = useState(true);
+  const [textToSearch, setTextToSearch] = useState('');
 
   function handleClick() {
     if (hidden === false) {
@@ -31,37 +33,29 @@ function Header({ name, show }) {
           alt="imagem do perfil"
         />
       </button>
-      <h1 data-testid="page-title">
-        { name }
-      </h1>
-      {
-        hidden
-          ? (
-            <input
-              className="search-input"
-              type="text"
-              data-testid="search-input"
-            />)
-          : undefined
-      }
+      <h1 data-testid="page-title">{name}</h1>
+      {!hidden
+        && <input
+          className="search-input"
+          type="text"
+          name=""
+          data-testid="search-input"
+          hidden={ hidden }
+          value={ textToSearch }
+          onChange={ ({ target }) => setTextToSearch(target.value) }
+        />}
+      {!hidden && <SearchBar textToSearch={ textToSearch } />}
 
-      {
-        show === 'true'
-          ? (
-            <button
-              className="search-btn"
-              type="button"
-              onClick={ handleClick }
-            >
-              <img
-                data-testid="search-top-btn"
-                src={ searchIcon }
-                alt="Search"
-              />
-            </button>
-          )
-          : undefined
-      }
+      {show === 'true' ? (
+        <button
+          className="search-btn"
+          type="button"
+          onClick={ handleClick }
+          data-testid="search-btn"
+        >
+          <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
+        </button>
+      ) : undefined}
     </header>
   );
 }
