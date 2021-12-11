@@ -1,12 +1,12 @@
-.card-img{
-  width: 30%;
+.card-img {
   height: 10%;
+  width: 30%;
 
 }
 
-.detail-img{
-  width: 100%;
+.detail-img {
   height: 70%;
+  width: 100%;
 }
 
 .meals {
@@ -61,10 +61,10 @@
 }
 
 .start-btn {
-  position: fixed;
-  bottom: 0px;
-  width: 100%;
+  bottom: 0;
   height: 40px;
+  position: fixed;
+  width: 100%;
 }
 
 /*
