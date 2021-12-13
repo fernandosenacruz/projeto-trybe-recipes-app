@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -14,12 +14,6 @@ function Comidas() {
   const [categories, setCategories] = useState([]);
   const [filtered, setFiltered] = useState('');
 
-  async function getRecipesAPI() {
-    const meals = await getRecipes(NUMBER_OF_RECIPES, recipesEndpoint);
-    setRecipeList(meals);
-    const cat = await getRecipes(NUMBER_OF_CATEGORIES, categoryEndpoint);
-    setCategories(cat);
-  }
   async function filterByCategory(category) {
     let filterEndPoint = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
     if (filtered === category || category === 'All') {
@@ -32,9 +26,20 @@ function Comidas() {
     setRecipeList(rcp);
   }
 
-  if (recipeList.length === 0) {
-    getRecipesAPI();
-  }
+  useEffect(() => {
+    async function loadRecipes() {
+      const meals = await getRecipes(NUMBER_OF_RECIPES, recipesEndpoint);
+      setRecipeList(meals);
+    }
+    async function loadCategories() {
+      const cat = await getRecipes(NUMBER_OF_CATEGORIES, categoryEndpoint);
+      setCategories(cat);
+    }
+    if (recipeList.length === 0 || !Object.keys(recipeList[0]).includes('idMeal')) {
+      loadRecipes();
+    }
+    loadCategories();
+  }, [setRecipeList, recipeList]);
 
   return (
     <div>
@@ -59,9 +64,10 @@ function Comidas() {
         All
       </button>
       {recipeList.map((recipe, index) => (<RecipeCard
-        key={ index + recipe.strMeal }
+        key={ index }
         recipe={ recipe }
         index={ index }
+        recomend={ false }
       />))}
       <Footer />
     </div>

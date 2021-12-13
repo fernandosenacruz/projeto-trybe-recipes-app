@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -14,12 +14,6 @@ function Bebidas() {
   const [categories, setCategories] = useState([]);
   const [filtered, setFiltered] = useState('');
 
-  async function getRecipesAPI() {
-    const drinks = await getRecipes(NUMBER_OF_RECIPES, recipesEndpoint);
-    setRecipeList(drinks);
-    const cat = await getRecipes(NUMBER_OF_CATEGORIES, categoryEndpoint);
-    setCategories(cat);
-  }
   async function filterByCategory(category) {
     let filterEndPoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`;
     if (filtered === category || category === 'All') {
@@ -32,16 +26,27 @@ function Bebidas() {
     setRecipeList(rcp);
   }
 
-  if (recipeList.length === 0) {
-    getRecipesAPI();
-  }
+  useEffect(() => {
+    async function loadRecipes() {
+      const drinks = await getRecipes(NUMBER_OF_RECIPES, recipesEndpoint);
+      setRecipeList(drinks);
+    }
+    async function loadCategories() {
+      const cat = await getRecipes(NUMBER_OF_CATEGORIES, categoryEndpoint);
+      setCategories(cat);
+    }
+    if (recipeList.length === 0 || !Object.keys(recipeList[0]).includes('idDrink')) {
+      loadRecipes();
+    }
+    loadCategories();
+  }, [setRecipeList, recipeList]);
 
   return (
     <div>
       <Header name="Bebidas" show="true" />
       {categories.map((cat, index) => (
         <button
-          key={ index }
+          key={ index + cat.strCategory }
           type="button"
           data-testid={ `${cat.strCategory}-category-filter` }
           onClick={ () => filterByCategory(cat.strCategory) }
@@ -62,6 +67,7 @@ function Bebidas() {
         key={ index }
         recipe={ recipe }
         index={ index }
+        recomend={ false }
       />))}
       <Footer />
     </div>

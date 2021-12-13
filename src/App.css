@@ -1,3 +1,14 @@
+.card-img {
+  height: 10%;
+  width: 30%;
+
+}
+
+.detail-img {
+  height: 70%;
+  width: 100%;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -47,6 +58,13 @@
   outline: none;
   padding: 5px;
   width: 250px;
+}
+
+.start-btn {
+  bottom: 0;
+  height: 40px;
+  position: fixed;
+  width: 100%;
 }
 
 /*

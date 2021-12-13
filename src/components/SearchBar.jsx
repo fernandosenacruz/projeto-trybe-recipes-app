@@ -8,7 +8,7 @@ const SearchBar = ({ textToSearch }) => {
   const history = useHistory();
   const { setRecipeList } = useContext(RecipesContext);
   const [searchType, setSearchType] = useState('');
-  const MAX_RECIPES = 12;
+  const MAX_RECIPES = 11;
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (searchType === 'f' && textToSearch.length > 1) {
