@@ -23,12 +23,13 @@ function ComidasDetalhes(props) {
   const [link, setLink] = useState('./images/whiteHeartIcon.svg');
 
   useEffect(() => {
-    const favRecipe = JSON.parse(localStorage.getItem('favRecipe')) || [];
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
       setLink('./images/blackHeartIcon.svg');
     } else {
       setLink('./images/whiteHeartIcon.svg');
     }
+    console.log(recipe);
   }, []);
 
   useEffect(() => {
@@ -105,7 +106,18 @@ function ComidasDetalhes(props) {
       <button
         data-testid="favorite-btn"
         type="button"
-        onClick={ () => setLink(favoriteRecipe(recipeId, 'comida')) }
+        onClick={ () => {
+          const obj = {
+            id: recipeId,
+            type: 'comida',
+            area: recipe.strArea,
+            category: recipe.strCategory,
+            alcoholicOrNot: '',
+            name: recipe.strMeal,
+            image: recipe.strMealThumb,
+          };
+          setLink(favoriteRecipe(obj));
+        } }
         src={ link }
 
       >

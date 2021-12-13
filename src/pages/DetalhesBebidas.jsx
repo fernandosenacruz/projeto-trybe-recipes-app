@@ -21,7 +21,7 @@ function BebidasDetalhes(props) {
   const [link, setLink] = useState('./images/whiteHeartIcon.svg');
 
   useEffect(() => {
-    const favRecipe = JSON.parse(localStorage.getItem('favRecipe')) || [];
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
       setLink('./images/blackHeartIcon.svg');
     } else {
@@ -100,7 +100,18 @@ function BebidasDetalhes(props) {
       <button
         data-testid="favorite-btn"
         type="button"
-        onClick={ () => setLink(favoriteRecipe(recipeId, 'bebida')) }
+        onClick={ () => {
+          const obj = {
+            id: recipeId,
+            type: 'bebida',
+            area: '',
+            category: recipe.strCategory,
+            alcoholicOrNot: recipe.strAlcoholic,
+            name: recipe.strDrink,
+            image: recipe.strDrinkThumb,
+          };
+          setLink(favoriteRecipe(obj));
+        } }
         src={ link }
       >
         Fav
