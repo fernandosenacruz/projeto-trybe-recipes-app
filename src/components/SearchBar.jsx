@@ -38,7 +38,6 @@ const SearchBar = ({ textToSearch }) => {
     try {
       let recipes = [];
       const data = await response.json();
-      console.log(isDrinkRoute);
       if (isDrinkRoute) {
         if (data.drinks.length === 1) {
           history.push(`/bebidas/${data.drinks[0].idDrink}`);
@@ -51,7 +50,6 @@ const SearchBar = ({ textToSearch }) => {
         }
         recipes = data.meals.filter((drink, index) => index <= MAX_RECIPES && drink);
       }
-      console.log(recipes);
       setRecipeList(recipes);
     } catch (error) {
       console.error(error);
