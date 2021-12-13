@@ -6,6 +6,7 @@ import getRecipes from '../services/getRecipes';
 import '../App.css';
 import StartRecipeButton from '../components/StartRecipeButton';
 import shareRecipe from '../helpers/shareRecipe';
+import favoriteRecipe from '../helpers/favoriteRecipe';
 
 function ComidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -18,6 +19,17 @@ function ComidasDetalhes(props) {
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
   const location = useLocation();
+  const recipeId = location.pathname.split('/').pop();
+  const [link, setLink] = useState('./images/whiteHeartIcon.svg');
+
+  useEffect(() => {
+    const favRecipe = JSON.parse(localStorage.getItem('favRecipe')) || [];
+    if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
+      setLink('./images/blackHeartIcon.svg');
+    } else {
+      setLink('./images/whiteHeartIcon.svg');
+    }
+  }, []);
 
   useEffect(() => {
     function getIngredients(rcp) {
@@ -90,7 +102,15 @@ function ComidasDetalhes(props) {
       >
         share
       </button>
-      <button data-testid="favorite-btn" type="button">Fav</button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+        onClick={ () => setLink(favoriteRecipe(recipeId, 'comida')) }
+        src={ link }
+
+      >
+        Fav
+      </button>
       <h4 data-testid="recipe-category">{strCategory}</h4>
       <ul>
         {ingredientsList.map((item, index) => (

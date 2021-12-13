@@ -5,6 +5,7 @@ import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
 import StartRecipeButton from '../components/StartRecipeButton';
 import shareRecipe from '../helpers/shareRecipe';
+import favoriteRecipe from '../helpers/favoriteRecipe';
 
 function BebidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -16,7 +17,17 @@ function BebidasDetalhes(props) {
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
   const location = useLocation();
+  const recipeId = location.pathname.split('/').pop();
+  const [link, setLink] = useState('./images/whiteHeartIcon.svg');
 
+  useEffect(() => {
+    const favRecipe = JSON.parse(localStorage.getItem('favRecipe')) || [];
+    if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
+      setLink('./images/blackHeartIcon.svg');
+    } else {
+      setLink('./images/whiteHeartIcon.svg');
+    }
+  }, []);
   useEffect(() => {
     function getIngredients(rcp) {
       const NOT_FOUND = -1;
@@ -32,7 +43,6 @@ function BebidasDetalhes(props) {
       });
       setIngredientsList(newIngredients);
     }
-
     function getMeasures(rcp) {
       const NOT_FOUND = -1;
       const entries = Object.entries(rcp);
@@ -64,12 +74,10 @@ function BebidasDetalhes(props) {
 
   function renderButton(recp) {
     if (typeof recp === 'object' && !Array.isArray(recp)) {
-      console.log(typeof recp);
       return <StartRecipeButton recipe={ recipe } id={ id } />;
     }
   }
 
-  console.log(recipe);
   const { strDrinkThumb: imgSrc,
     strDrink: name, strAlcoholic, strInstructions } = recipe;
 
@@ -89,7 +97,14 @@ function BebidasDetalhes(props) {
       >
         share
       </button>
-      <button data-testid="favorite-btn" type="button">Fav</button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+        onClick={ () => setLink(favoriteRecipe(recipeId, 'bebida')) }
+        src={ link }
+      >
+        Fav
+      </button>
       <h4 data-testid="recipe-category">{strAlcoholic}</h4>
       <ul>
         {ingredientsList.map((item, index) => (
