@@ -20,6 +20,7 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-toastify": "^8.1.0",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "websocket-extensions": ">=0.1.4"

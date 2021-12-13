@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
 import '../App.css';
 import StartRecipeButton from '../components/StartRecipeButton';
+import shareRecipe from '../helpers/shareRecipe';
 
 function ComidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -15,6 +17,7 @@ function ComidasDetalhes(props) {
   const [ingredientsList, setIngredientsList] = useState([]);
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
+  const location = useLocation();
 
   useEffect(() => {
     function getIngredients(rcp) {
@@ -64,12 +67,10 @@ function ComidasDetalhes(props) {
 
   function renderButton(recp) {
     if (typeof recp === 'object' && !Array.isArray(recp)) {
-      console.log(typeof recp);
       return <StartRecipeButton recipe={ recipe } id={ id } />;
     }
   }
 
-  console.log(recipe);
   const { strMealThumb: imgSrc,
     strMeal: name, strCategory, strInstructions } = recipe;
 
@@ -82,7 +83,13 @@ function ComidasDetalhes(props) {
         className="detail-img"
       />
       <h2 data-testid="recipe-title">{name}</h2>
-      <button data-testid="share-btn" type="button">share</button>
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={ () => shareRecipe(location) }
+      >
+        share
+      </button>
       <button data-testid="favorite-btn" type="button">Fav</button>
       <h4 data-testid="recipe-category">{strCategory}</h4>
       <ul>
