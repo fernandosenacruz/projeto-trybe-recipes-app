@@ -8,6 +8,7 @@ const IngredientsList = ({ recipe }) => {
   const [ingredientsList, setIngredientsList] = useState([]);
   const [measuresList, setMeasureList] = useState([]);
   const [isProgressRoute, setIsProgressRoute] = useState(false);
+  const [isDone, setIsDone] = useState({});
 
   useEffect(() => {
     const inProgress = location.pathname.includes('in-progress');
@@ -18,6 +19,15 @@ const IngredientsList = ({ recipe }) => {
     setIsProgressRoute(inProgress);
   }, [recipe]);
 
+  const handleChange = ({ target }) => {
+    console.log(target.value);
+    if (target.value === 'true') {
+      setIsDone({ ...isDone, [target.name]: false });
+    } else {
+      setIsDone({ ...isDone, [target.name]: true });
+    }
+  };
+
   return (
     <div>
       <ul>
@@ -27,10 +37,19 @@ const IngredientsList = ({ recipe }) => {
             data-testid={ isProgressRoute
               ? `data-testid=${index}-ingredient-step`
               : `${index}-ingredient-name-and-measure` }
+            className={ isDone[`checkbox${index}`] && 'line-through' }
           >
             {`${item}: ${measuresList[index]}`}
-
-          </li>))}
+            <input
+              type="checkbox"
+              key={ index }
+              name={ `checkbox${index}` }
+              id=""
+              onChange={ handleChange }
+              value={ isDone[`checkbox${index}`] || false }
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

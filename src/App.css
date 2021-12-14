@@ -1,3 +1,7 @@
+.line-through {
+  text-decoration: line-through;
+}
+
 .card-img {
   height: 60%;
   width: 60%;

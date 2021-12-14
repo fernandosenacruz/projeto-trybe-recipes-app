@@ -19,6 +19,7 @@ function BebidasProcesso() {
   } = recipeInProgress;
   const location = useLocation();
   const [link, setLink] = useState();
+
   useEffect(() => {
     const id = location.pathname.split('/')[2];
     const getRecipeById = async () => {
