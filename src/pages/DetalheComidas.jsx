@@ -5,6 +5,7 @@ import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
 import '../App.css';
 import StartRecipeButton from '../components/StartRecipeButton';
+import IngredientsList from '../components/IngredientsList';
 import shareRecipe from '../helpers/shareRecipe';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -17,8 +18,6 @@ function ComidasDetalhes(props) {
   const { id } = match.params;
   const [recipe, setRecipe] = useState([]);
   const [embedYt, setEmbedYt] = useState([]);
-  const [ingredientsList, setIngredientsList] = useState([]);
-  const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
   const location = useLocation();
   const [link, setLink] = useState();
@@ -33,35 +32,6 @@ function ComidasDetalhes(props) {
   }, [id]);
 
   useEffect(() => {
-    function getIngredients(rcp) {
-      const NOT_FOUND = -1;
-      const entries = Object.entries(rcp);
-      const newIngredients = [];
-      entries.forEach((entry) => {
-        if (entry[0].indexOf('Ingredient')
-        !== NOT_FOUND
-        && entry[1] !== ''
-        && entry[1] !== null) {
-          newIngredients.push(entry[1]);
-        }
-      });
-      setIngredientsList(newIngredients);
-    }
-
-    function getMeasures(rcp) {
-      const NOT_FOUND = -1;
-      const entries = Object.entries(rcp);
-      const newMeasures = [];
-      entries.forEach((entry) => {
-        if (entry[0].indexOf('Measure')
-        !== NOT_FOUND
-        && entry[1] !== ' ') {
-          newMeasures.push(entry[1]);
-        }
-      });
-      setMeasureList(newMeasures);
-    }
-
     async function fetchRecipe() {
       const endPoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const recomendationEndPoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -69,12 +39,9 @@ function ComidasDetalhes(props) {
       const recip = rcp[0];
       setRecipe(recip);
       setEmbedYt(recip.strYoutube.replace('watch?v=', 'embed/'));
-      getIngredients(recip);
-      getMeasures(recip);
       const drinks = await getRecipes(NUMEBR_OF_RECOMENDATIONS, recomendationEndPoint);
       setRecomended(drinks);
     }
-
     fetchRecipe();
   }, [id]);
 
@@ -117,7 +84,6 @@ function ComidasDetalhes(props) {
             image: recipe.strMealThumb,
           };
           const icon = favoriteRecipe(obj);
-          console.log(icon);
           setLink(icon);
         } }
         src={ link }
@@ -125,16 +91,7 @@ function ComidasDetalhes(props) {
         <img src={ link } alt="heart icon" />
       </button>
       <h4 data-testid="recipe-category">{strCategory}</h4>
-      <ul>
-        {ingredientsList.map((item, index) => (
-          <li
-            key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {`${item}: ${measureList[index]}`}
-
-          </li>))}
-      </ul>
+      <IngredientsList recipe={ recipe } />
       <p data-testid="instructions">{strInstructions}</p>
       <iframe
         src={ embedYt }
@@ -158,6 +115,7 @@ function ComidasDetalhes(props) {
 
   );
 }
+
 ComidasDetalhes.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
