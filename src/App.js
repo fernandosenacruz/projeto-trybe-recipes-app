@@ -1,5 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import BebidasProcesso from './pages/BebidasProcesso';
@@ -59,6 +61,7 @@ function App() {
         <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
         <Route exact path="/receitas-favoritas" component={ ReceitasFavoritas } />
       </Switch>
+      <ToastContainer />
     </BrowserRouter>
   );
 }

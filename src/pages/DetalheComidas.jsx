@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard';
 import getRecipes from '../services/getRecipes';
 import '../App.css';
 import StartRecipeButton from '../components/StartRecipeButton';
+import shareRecipe from '../helpers/shareRecipe';
+import favoriteRecipe from '../helpers/favoriteRecipe';
+import blackHeart from '../images/blackHeartIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.svg';
 
 function ComidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -15,6 +20,17 @@ function ComidasDetalhes(props) {
   const [ingredientsList, setIngredientsList] = useState([]);
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
+  const location = useLocation();
+  const [link, setLink] = useState();
+
+  useEffect(() => {
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
+      setLink(blackHeart);
+    } else {
+      setLink(whiteHeart);
+    }
+  }, [id]);
 
   useEffect(() => {
     function getIngredients(rcp) {
@@ -64,12 +80,10 @@ function ComidasDetalhes(props) {
 
   function renderButton(recp) {
     if (typeof recp === 'object' && !Array.isArray(recp)) {
-      console.log(typeof recp);
       return <StartRecipeButton recipe={ recipe } id={ id } />;
     }
   }
 
-  console.log(recipe);
   const { strMealThumb: imgSrc,
     strMeal: name, strCategory, strInstructions } = recipe;
 
@@ -79,11 +93,37 @@ function ComidasDetalhes(props) {
         src={ `${imgSrc}` }
         alt={ `${name}` }
         data-testid="recipe-photo"
-        className="detail-img"
+        className="detail-img rounded"
       />
       <h2 data-testid="recipe-title">{name}</h2>
-      <button data-testid="share-btn" type="button">share</button>
-      <button data-testid="favorite-btn" type="button">Fav</button>
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={ () => shareRecipe(location) }
+      >
+        share
+      </button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+        onClick={ () => {
+          const obj = {
+            id,
+            type: 'comida',
+            area: recipe.strArea,
+            category: recipe.strCategory,
+            alcoholicOrNot: '',
+            name: recipe.strMeal,
+            image: recipe.strMealThumb,
+          };
+          const icon = favoriteRecipe(obj);
+          console.log(icon);
+          setLink(icon);
+        } }
+        src={ link }
+      >
+        <img src={ link } alt="heart icon" />
+      </button>
       <h4 data-testid="recipe-category">{strCategory}</h4>
       <ul>
         {ingredientsList.map((item, index) => (
@@ -103,12 +143,16 @@ function ComidasDetalhes(props) {
         height="315"
         data-testid="video"
       />
-      {recomended.map((recip, index) => (<RecipeCard
-        key={ index }
-        recipe={ recip }
-        index={ index }
-        recomend
-      />))}
+      <div className="container">
+        <div className="row">
+          {recomended.map((recip, index) => (<RecipeCard
+            key={ index }
+            recipe={ recip }
+            index={ index }
+            recomend
+          />))}
+        </div>
+      </div>
       {renderButton(recipe)}
 
     </div>
