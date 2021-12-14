@@ -14,8 +14,8 @@ function BebidasProcesso() {
     strCategory,
     strInstructions,
     strDrinkThumb,
-    strArea,
     idDrink,
+    strAlcoholic,
   } = recipeInProgress;
   const location = useLocation();
   const [link, setLink] = useState();
@@ -70,9 +70,9 @@ function BebidasProcesso() {
               const obj = {
                 id: idDrink,
                 type: 'bebida',
-                area: strArea,
+                area: '',
                 category: strCategory,
-                alcoholicOrNot: '',
+                alcoholicOrNot: strAlcoholic,
                 name: strDrink,
                 image: strDrinkThumb,
               };

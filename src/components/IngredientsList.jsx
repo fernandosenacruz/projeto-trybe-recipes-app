@@ -39,7 +39,6 @@ const IngredientsList = ({ recipe }) => {
               : `${index}-ingredient-name-and-measure` }
             className={ isDone[`checkbox${index}`] && 'line-through' }
           >
-            {`${item}: ${measuresList[index]}`}
             <input
               type="checkbox"
               key={ index }
@@ -48,6 +47,7 @@ const IngredientsList = ({ recipe }) => {
               onChange={ handleChange }
               value={ isDone[`checkbox${index}`] || false }
             />
+            {`${item}: ${measuresList[index]}`}
           </li>
         ))}
       </ul>
