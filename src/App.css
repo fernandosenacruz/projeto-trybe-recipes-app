@@ -1,12 +1,14 @@
 .card-img {
-  height: 10%;
-  width: 30%;
+  height: 60%;
+  width: 60%;
+}
 
+h4 {
+  display: inline;
 }
 
 .detail-img {
   height: 70%;
-  width: 100%;
 }
 
 .meals {

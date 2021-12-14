@@ -93,7 +93,7 @@ function ComidasDetalhes(props) {
         src={ `${imgSrc}` }
         alt={ `${name}` }
         data-testid="recipe-photo"
-        className="detail-img"
+        className="detail-img rounded"
       />
       <h2 data-testid="recipe-title">{name}</h2>
       <button
@@ -122,7 +122,7 @@ function ComidasDetalhes(props) {
         } }
         src={ link }
       >
-        {/* <img src={ link } alt="heart icon" /> */}
+        <img src={ link } alt="heart icon" />
       </button>
       <h4 data-testid="recipe-category">{strCategory}</h4>
       <ul>
@@ -143,12 +143,16 @@ function ComidasDetalhes(props) {
         height="315"
         data-testid="video"
       />
-      {recomended.map((recip, index) => (<RecipeCard
-        key={ index }
-        recipe={ recip }
-        index={ index }
-        recomend
-      />))}
+      <div className="container">
+        <div className="row">
+          {recomended.map((recip, index) => (<RecipeCard
+            key={ index }
+            recipe={ recip }
+            index={ index }
+            recomend
+          />))}
+        </div>
+      </div>
       {renderButton(recipe)}
 
     </div>

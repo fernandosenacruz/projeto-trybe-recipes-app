@@ -15,19 +15,21 @@ function RecipeCard({ recipe, index, recomend }) {
     dataTestId = `${index}-card-name`;
   }
   return (
-    <Link to={ `/${route}/${recipe[id]}` }>
-      <div
-        data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
-      >
+    <div
+      data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
+      className={ `col-6 ${index >= 2 ? 'd-none' : ' '}` }
+    >
+      <Link to={ `/${route}/${recipe[id]}` }>
         <h4 data-testid={ dataTestId }>{recipe[`str${type}`]}</h4>
         <img
           src={ recipe[`str${type}Thumb`] }
           alt={ `foto da receita ${recipe[`str${type}`]}` }
           data-testid={ `${index}-card-img` }
-          className="card-img"
+          className="card-img img-fluid d-block"
+          width="300px"
         />
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

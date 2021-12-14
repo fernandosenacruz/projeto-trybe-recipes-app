@@ -132,12 +132,16 @@ function BebidasDetalhes(props) {
           </li>))}
       </ul>
       <p data-testid="instructions">{strInstructions}</p>
-      {recomended.map((recip, index) => (<RecipeCard
-        key={ index }
-        recipe={ recip }
-        index={ index }
-        recomend
-      />))}
+      <div className="container">
+        <div className="row">
+          {recomended.map((recip, index) => (<RecipeCard
+            key={ index }
+            recipe={ recip }
+            index={ index }
+            recomend
+          />))}
+        </div>
+      </div>
       {renderButton(recipe)}
 
     </div>
