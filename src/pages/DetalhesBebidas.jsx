@@ -6,6 +6,8 @@ import getRecipes from '../services/getRecipes';
 import StartRecipeButton from '../components/StartRecipeButton';
 import shareRecipe from '../helpers/shareRecipe';
 import favoriteRecipe from '../helpers/favoriteRecipe';
+import blackHeart from '../images/blackHeartIcon.svg';
+import whiteHeart from '../images/whiteHeartIcon.svg';
 
 function BebidasDetalhes(props) {
   const NUMBER_OF_RECIPES = 1;
@@ -17,17 +19,16 @@ function BebidasDetalhes(props) {
   const [measureList, setMeasureList] = useState([]);
   const [recomended, setRecomended] = useState([]);
   const location = useLocation();
-  const recipeId = location.pathname.split('/').pop();
   const [link, setLink] = useState('./images/whiteHeartIcon.svg');
 
   useEffect(() => {
     const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     if (favRecipe !== [] && favRecipe.some((fav) => fav.id === id)) {
-      setLink('./images/blackHeartIcon.svg');
+      setLink(blackHeart);
     } else {
-      setLink('./images/whiteHeartIcon.svg');
+      setLink(whiteHeart);
     }
-  }, []);
+  }, [id]);
   useEffect(() => {
     function getIngredients(rcp) {
       const NOT_FOUND = -1;
@@ -79,10 +80,11 @@ function BebidasDetalhes(props) {
   }
 
   const { strDrinkThumb: imgSrc,
-    strDrink: name, strAlcoholic, strInstructions } = recipe;
+    strDrink: name, strAlcoholic, strInstructions, strCategory: category } = recipe;
 
   return (
     <div>
+      {console.log(recipe)}
       <img
         src={ `${imgSrc}` }
         alt={ `${name}` }
@@ -102,19 +104,21 @@ function BebidasDetalhes(props) {
         type="button"
         onClick={ () => {
           const obj = {
-            id: recipeId,
+            id,
             type: 'bebida',
             area: '',
-            category: recipe.strCategory,
-            alcoholicOrNot: recipe.strAlcoholic,
-            name: recipe.strDrink,
-            image: recipe.strDrinkThumb,
+            category,
+            alcoholicOrNot: strAlcoholic,
+            name,
+            image: imgSrc,
           };
-          setLink(favoriteRecipe(obj));
+          const icon = favoriteRecipe(obj);
+          console.log(icon);
+          setLink(icon);
         } }
         src={ link }
       >
-        Fav
+        <img src={ link } alt="heart icon" />
       </button>
       <h4 data-testid="recipe-category">{strAlcoholic}</h4>
       <ul>
