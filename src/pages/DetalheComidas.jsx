@@ -154,7 +154,6 @@ function ComidasDetalhes(props) {
         </div>
       </div>
       {renderButton(recipe)}
-
     </div>
 
   );
