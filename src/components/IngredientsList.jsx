@@ -48,21 +48,25 @@ const IngredientsList = ({ recipe }) => {
           <li
             key={ index }
             data-testid={ isProgressRoute
-              ? `data-testid=${index}-ingredient-step`
+              ? `${index}-ingredient-step`
               : `${index}-ingredient-name-and-measure` }
-            className={ isDone[`checkbox${index}`] && 'line-through' }
           >
-            <input
-              type="checkbox"
-              key={ index }
-              name={ `checkbox${index}` }
-              id=""
-              onChange={ handleChange }
-              value={ isDone[`checkbox${index}`] || false }
-              checked={ isDone[`checkbox${index}`] || false }
-              data-testid={ `${index}-ingredient-step` }
-            />
-            {`${item}: ${measuresList[index]}`}
+            <label
+              htmlFor={ `${index}-ingredient` }
+              className={ isDone[`checkbox${index}`] && 'line-through' }
+            >
+              <input
+                type="checkbox"
+                key={ index }
+                name={ `checkbox${index}` }
+                id={ `${index}-ingredient` }
+                onChange={ handleChange }
+                value={ isDone[`checkbox${index}`] || false }
+                checked={ isDone[`checkbox${index}`] || false }
+                data-testid={ `${index}-ingredient-step` }
+              />
+              {`${item}: ${measuresList[index]}`}
+            </label>
           </li>
         ))}
       </ul>
