@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import shareRecipe from '../helpers/shareRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -6,6 +6,8 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import IngredientsList from '../components/IngredientsList';
+import changeButtonStatus from '../helpers/changeButtonStatus';
+import RecipesContext from '../context/RecipesContext';
 
 function ComidasProcesso() {
   const [recipeInProgress, setRecipeInProgress] = useState({});
@@ -19,6 +21,8 @@ function ComidasProcesso() {
   } = recipeInProgress;
   const location = useLocation();
   const [link, setLink] = useState();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { isDone } = useContext(RecipesContext);
   useEffect(() => {
     const id = location.pathname.split('/')[2];
     const getRecipeById = async () => {
@@ -34,7 +38,8 @@ function ComidasProcesso() {
       setLink(whiteHeart);
     }
   }, [location.pathname]);
-
+  useEffect(() => setIsButtonDisabled(changeButtonStatus(isDone, recipeInProgress)),
+    [isDone, recipeInProgress]);
   return (
     <div className="card">
       <img
@@ -97,6 +102,7 @@ function ComidasProcesso() {
               data-testid="finish-recipe-btn"
               type="submit"
               className="btn btn-primary"
+              disabled={ !isButtonDisabled }
             >
               Finalizar Receita
             </button>

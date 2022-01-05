@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import shareRecipe from '../helpers/shareRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
@@ -6,6 +6,8 @@ import whiteHeart from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import IngredientsList from '../components/IngredientsList';
+import changeButtonStatus from '../helpers/changeButtonStatus';
+import RecipesContext from '../context/RecipesContext';
 
 function BebidasProcesso() {
   const [recipeInProgress, setRecipeInProgress] = useState({});
@@ -19,6 +21,8 @@ function BebidasProcesso() {
   } = recipeInProgress;
   const location = useLocation();
   const [link, setLink] = useState();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const { isDone } = useContext(RecipesContext);
 
   useEffect(() => {
     const id = location.pathname.split('/')[2];
@@ -35,6 +39,9 @@ function BebidasProcesso() {
       setLink(whiteHeart);
     }
   }, [location.pathname]);
+
+  useEffect(() => setIsButtonDisabled(changeButtonStatus(isDone, recipeInProgress)),
+    [isDone, recipeInProgress]);
 
   return (
     <div className="card">
@@ -84,7 +91,9 @@ function BebidasProcesso() {
             <img src={ link } alt="heart icon" />
           </button>
         </div>
-        <IngredientsList recipe={ recipeInProgress } />
+        <IngredientsList
+          recipe={ recipeInProgress }
+        />
         <p
           data-testid="instructions"
           className="card-text p-3 text-justify"
@@ -98,6 +107,7 @@ function BebidasProcesso() {
               data-testid="finish-recipe-btn"
               type="submit"
               className="btn btn-primary"
+              disabled={ !isButtonDisabled }
             >
               Finalizar Receita
             </button>
