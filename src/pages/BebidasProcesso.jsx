@@ -106,7 +106,7 @@ function BebidasProcesso() {
             <button
               data-testid="finish-recipe-btn"
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary btn-lg"
               disabled={ !isButtonDisabled }
               onClick={ () => history.push('/receitas-feitas') }
             >

@@ -6,6 +6,7 @@ import getRecipes from '../services/getRecipes';
 import StartRecipeButton from '../components/StartRecipeButton';
 import IngredientsList from '../components/IngredientsList';
 import shareRecipe from '../helpers/shareRecipe';
+import shareIcon from '../images/shareIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
@@ -53,46 +54,65 @@ function BebidasDetalhes(props) {
     strDrink: name, strAlcoholic, strInstructions, strCategory: category } = recipe;
 
   return (
-    <div>
+    <div className="card">
       <img
         src={ `${imgSrc}` }
         alt={ `${name}` }
         data-testid="recipe-photo"
-        className="detail-img"
+        className="detail-img rounded"
       />
-      <h2 data-testid="recipe-title">{name}</h2>
-      <button
-        data-testid="share-btn"
-        type="button"
-        onClick={ () => shareRecipe(location) }
-      >
-        share
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-        onClick={ () => {
-          const obj = {
-            id,
-            type: 'bebida',
-            area: '',
-            category,
-            alcoholicOrNot: strAlcoholic,
-            name,
-            image: imgSrc,
-          };
-          const icon = favoriteRecipe(obj);
-          setLink(icon);
-        } }
-        src={ link }
-      >
-        <img src={ link } alt="heart icon" />
-      </button>
-      <h4 data-testid="recipe-category">{strAlcoholic}</h4>
-      <IngredientsList recipe={ recipe } />
-      <p data-testid="instructions">{strInstructions}</p>
-      <div className="container">
-        <div className="row">
+      <div className="card-body">
+        <h5 data-testid="recipe-title" className="card-title">{name}</h5>
+        <span
+          data-testid="recipe-category"
+          className="badge rounded-pill bg-info text-dark"
+        >
+          {strAlcoholic}
+        </span>
+        <div className="mt-3 mb-1">
+
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ () => shareRecipe(location) }
+            className="btn"
+          >
+            <img src={ shareIcon } alt="heart icon" />
+          </button>
+          <button
+            data-testid="favorite-btn"
+            type="button"
+            className="btn"
+            onClick={ () => {
+              const obj = {
+                id,
+                type: 'bebida',
+                area: '',
+                category,
+                alcoholicOrNot: strAlcoholic,
+                name,
+                image: imgSrc,
+              };
+              const icon = favoriteRecipe(obj);
+              setLink(icon);
+            } }
+            src={ link }
+          >
+            <img src={ link } alt="heart icon" />
+          </button>
+        </div>
+
+        <IngredientsList recipe={ recipe } />
+        <p
+          data-testid="instructions"
+          className="card-text p-3 text-justify"
+        >
+          {strInstructions}
+        </p>
+      </div>
+
+      <div className="container mb-1">
+        <div className="row p-5">
           {recomended.map((recip, index) => (<RecipeCard
             key={ index }
             recipe={ recip }
@@ -102,7 +122,6 @@ function BebidasDetalhes(props) {
         </div>
       </div>
       {renderButton(recipe)}
-
     </div>
 
   );
