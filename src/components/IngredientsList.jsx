@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getIngredients, getMeasures } from '../helpers/getIngredients';
 import checkIngredients from '../helpers/checkIngredients';
+import teste from '../helpers/teste';
 import RecipesContext from '../context/RecipesContext';
 
 const IngredientsList = ({ recipe }) => {
@@ -26,14 +27,16 @@ const IngredientsList = ({ recipe }) => {
 
   useEffect(() => {
     checkIngredients(x, []);
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    || false;
-    const checkedDrinkOrMealExists = inProgressRecipes
-     !== undefined;
-    const drinkOrMealExists = inProgressRecipes[x][id] !== undefined;
-    if (inProgressRecipes
-      && drinkOrMealExists
-      && checkedDrinkOrMealExists) setIsDone(...inProgressRecipes[x][id]);
+    teste(setIsDone, x, id);
+    // PARA REDUZIR A COMPLEXIDADE TRANSFERIMOS OS COMANDOS ABAIXO PARA A FUNÇÃO TESTE
+    // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    // || false;
+    // const checkedDrinkOrMealExists = inProgressRecipes
+    //  !== undefined;
+    // const drinkOrMealExists = inProgressRecipes[x][id] !== undefined;
+    // if (inProgressRecipes
+    //   && drinkOrMealExists
+    //   && checkedDrinkOrMealExists) setIsDone(...inProgressRecipes[x][id]);
   }, [id, setIsDone, x]);
 
   const handleChange = ({ target }) => {
