@@ -26,7 +26,6 @@ function RecipeCard({ recipe, index, recomend }) {
           alt={ `foto da receita ${recipe[`str${type}`]}` }
           data-testid={ `${index}-card-img` }
           className="card-img img-fluid d-block"
-          width="300px"
         />
       </Link>
     </div>

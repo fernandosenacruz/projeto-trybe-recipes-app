@@ -8,7 +8,6 @@ const favoriteRecipe = ({ id, type, area, category, alcoholicOrNot, name, image 
     localStorage.setItem('favoriteRecipes', JSON.stringify(unfavorite));
     return whiteHeart;
   }
-  console.log(area);
   localStorage.setItem(
     'favoriteRecipes', JSON.stringify(
       [...favRecipe, { id, type, area, category, alcoholicOrNot, name, image }],
