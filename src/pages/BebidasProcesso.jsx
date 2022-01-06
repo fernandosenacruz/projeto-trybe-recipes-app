@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import shareRecipe from '../helpers/shareRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
@@ -20,6 +20,7 @@ function BebidasProcesso() {
     strAlcoholic,
   } = recipeInProgress;
   const location = useLocation();
+  const history = useHistory();
   const [link, setLink] = useState();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { isDone } = useContext(RecipesContext);
@@ -108,6 +109,7 @@ function BebidasProcesso() {
               type="submit"
               className="btn btn-primary"
               disabled={ !isButtonDisabled }
+              onClick={ () => history.push('/receitas-feitas') }
             >
               Finalizar Receita
             </button>
