@@ -68,7 +68,6 @@ function BebidasProcesso() {
             className="btn"
           >
             <img src={ shareIcon } alt="heart icon" />
-
           </button>
           <button
             data-testid="favorite-btn"

@@ -17,6 +17,12 @@ h4 {
   width: 80%;
 }
 
+.recipe-video {
+  height: 30%;
+  padding: 2%;
+  width: 95%;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;

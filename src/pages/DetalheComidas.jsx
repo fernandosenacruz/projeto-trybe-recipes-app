@@ -7,6 +7,7 @@ import '../App.css';
 import StartRecipeButton from '../components/StartRecipeButton';
 import IngredientsList from '../components/IngredientsList';
 import shareRecipe from '../helpers/shareRecipe';
+import shareIcon from '../images/shareIcon.svg';
 import favoriteRecipe from '../helpers/favoriteRecipe';
 import blackHeart from '../images/blackHeartIcon.svg';
 import whiteHeart from '../images/whiteHeartIcon.svg';
@@ -55,53 +56,71 @@ function ComidasDetalhes(props) {
     strMeal: name, strCategory, strInstructions } = recipe;
 
   return (
-    <div>
+    <div className="card">
       <img
         src={ `${imgSrc}` }
         alt={ `${name}` }
         data-testid="recipe-photo"
         className="detail-img rounded"
       />
-      <h2 data-testid="recipe-title">{name}</h2>
-      <button
-        data-testid="share-btn"
-        type="button"
-        onClick={ () => shareRecipe(location) }
-      >
-        share
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-        onClick={ () => {
-          const obj = {
-            id,
-            type: 'comida',
-            area: recipe.strArea,
-            category: recipe.strCategory,
-            alcoholicOrNot: '',
-            name: recipe.strMeal,
-            image: recipe.strMealThumb,
-          };
-          const icon = favoriteRecipe(obj);
-          setLink(icon);
-        } }
-        src={ link }
-      >
-        <img src={ link } alt="heart icon" />
-      </button>
-      <h4 data-testid="recipe-category">{strCategory}</h4>
-      <IngredientsList recipe={ recipe } />
-      <p data-testid="instructions">{strInstructions}</p>
-      <iframe
-        src={ embedYt }
-        title="video"
-        width="420"
-        height="315"
-        data-testid="video"
-      />
-      <div className="container">
-        <div className="row">
+      <div className="card-body">
+        <h5 data-testid="recipe-title" className="card-title">{name}</h5>
+        <span
+          data-testid="recipe-category"
+          className="badge rounded-pill bg-info text-dark"
+        >
+          {strCategory}
+        </span>
+        <div className="mt-3 mb-1">
+
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ () => shareRecipe(location) }
+            className="btn"
+          >
+            <img src={ shareIcon } alt="heart icon" />
+          </button>
+          <button
+            data-testid="favorite-btn"
+            type="button"
+            className="btn"
+            onClick={ () => {
+              const obj = {
+                id,
+                type: 'comida',
+                area: recipe.strArea,
+                category: recipe.strCategory,
+                alcoholicOrNot: '',
+                name: recipe.strMeal,
+                image: recipe.strMealThumb,
+              };
+              const icon = favoriteRecipe(obj);
+              setLink(icon);
+            } }
+            src={ link }
+          >
+            <img src={ link } alt="heart icon" />
+          </button>
+        </div>
+
+        <IngredientsList recipe={ recipe } />
+        <p
+          data-testid="instructions"
+          className="card-text p-3 text-justify"
+        >
+          {strInstructions}
+        </p>
+        <iframe
+          src={ embedYt }
+          title="video"
+          className="recipe-video"
+          data-testid="video"
+        />
+      </div>
+
+      <div className="container mb-1">
+        <div className="row p-5">
           {recomended.map((recip, index) => (<RecipeCard
             key={ index }
             recipe={ recip }
