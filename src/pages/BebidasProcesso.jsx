@@ -8,6 +8,7 @@ import favoriteRecipe from '../helpers/favoriteRecipe';
 import IngredientsList from '../components/IngredientsList';
 import changeButtonStatus from '../helpers/changeButtonStatus';
 import RecipesContext from '../context/RecipesContext';
+import manageCompletedRecipes from '../helpers/manageCompletedRecipes';
 
 function BebidasProcesso() {
   const [recipeInProgress, setRecipeInProgress] = useState({});
@@ -18,12 +19,23 @@ function BebidasProcesso() {
     strDrinkThumb,
     idDrink,
     strAlcoholic,
+    strTags,
   } = recipeInProgress;
   const location = useLocation();
   const history = useHistory();
   const [link, setLink] = useState();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { isDone } = useContext(RecipesContext);
+  let recipeFav = {
+    id: idDrink,
+    type: 'bebida',
+    area: '',
+    category: strCategory,
+    alcoholicOrNot: strAlcoholic,
+    name: strDrink,
+    image: strDrinkThumb,
+    tags: strTags ? strTags.split(',').slice(0, 2) : [],
+  };
 
   useEffect(() => {
     const id = location.pathname.split('/')[2];
@@ -43,6 +55,18 @@ function BebidasProcesso() {
 
   useEffect(() => setIsButtonDisabled(changeButtonStatus(isDone, recipeInProgress)),
     [isDone, recipeInProgress]);
+
+  function recipeDone() {
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const doneDate = `${day}/${month}/${today.getFullYear()}`;
+    if (!recipeFav.doneDate) {
+      recipeFav = { ...recipeFav, doneDate };
+    }
+    manageCompletedRecipes('add', recipeFav);
+    history.push('/receitas-feitas');
+  }
 
   return (
     <div className="card">
@@ -75,16 +99,7 @@ function BebidasProcesso() {
             type="button"
             className="btn"
             onClick={ () => {
-              const obj = {
-                id: idDrink,
-                type: 'bebida',
-                area: '',
-                category: strCategory,
-                alcoholicOrNot: strAlcoholic,
-                name: strDrink,
-                image: strDrinkThumb,
-              };
-              const icon = favoriteRecipe(obj);
+              const icon = favoriteRecipe(recipeFav);
               setLink(icon);
             } }
             src={ link }
@@ -109,7 +124,7 @@ function BebidasProcesso() {
               type="submit"
               className="btn btn-primary"
               disabled={ !isButtonDisabled }
-              onClick={ () => history.push('/receitas-feitas') }
+              onClick={ recipeDone }
             >
               Finalizar Receita
             </button>
