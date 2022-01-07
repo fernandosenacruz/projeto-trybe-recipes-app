@@ -119,7 +119,7 @@ function ComidasProcesso() {
             <button
               data-testid="finish-recipe-btn"
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm fixed-bottom w-100"
               disabled={ !isButtonDisabled }
               onClick={ recipeDone }
             >

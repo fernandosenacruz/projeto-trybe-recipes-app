@@ -21,7 +21,7 @@ function Header({ name, show }) {
   }
 
   return (
-    <header className="header">
+    <header className="header d-flex flex-column">
       <button
         className="prof-btn"
         type="button"

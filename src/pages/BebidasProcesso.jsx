@@ -92,7 +92,6 @@ function BebidasProcesso() {
             className="btn"
           >
             <img src={ shareIcon } alt="heart icon" />
-
           </button>
           <button
             data-testid="favorite-btn"
@@ -122,7 +121,7 @@ function BebidasProcesso() {
             <button
               data-testid="finish-recipe-btn"
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary btn-lg"
               disabled={ !isButtonDisabled }
               onClick={ recipeDone }
             >

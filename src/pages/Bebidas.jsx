@@ -44,25 +44,30 @@ function Bebidas() {
   return (
     <div>
       <Header name="Bebidas" show="true" />
-      {categories.map((cat, index) => (
+      <div className="" role="group">
+
+        {categories.map((cat, index) => (
+          <button
+            key={ index + cat.strCategory }
+            type="button"
+            data-testid={ `${cat.strCategory}-category-filter` }
+            onClick={ () => filterByCategory(cat.strCategory) }
+            className="btn btn-secondary btn-sm"
+          >
+            {cat.strCategory}
+          </button>
+        ))}
         <button
-          key={ index + cat.strCategory }
+          key="all"
           type="button"
-          data-testid={ `${cat.strCategory}-category-filter` }
-          onClick={ () => filterByCategory(cat.strCategory) }
+          data-testid="All-category-filter"
+          name="All"
+          onClick={ () => filterByCategory('All') }
+          className="btn btn-primary btn-sm"
         >
-          {cat.strCategory}
+          All
         </button>
-      ))}
-      <button
-        key="all"
-        type="button"
-        data-testid="All-category-filter"
-        name="All"
-        onClick={ () => filterByCategory('All') }
-      >
-        All
-      </button>
+      </div>
       {recipeList.map((recipe, index) => (<RecipeCard
         key={ index }
         recipe={ recipe }

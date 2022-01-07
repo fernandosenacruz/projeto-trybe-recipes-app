@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getIngredients, getMeasures } from '../helpers/getIngredients';
 import checkIngredients from '../helpers/checkIngredients';
+import teste from '../helpers/teste';
 import RecipesContext from '../context/RecipesContext';
 
 const IngredientsList = ({ recipe }) => {
@@ -13,6 +14,7 @@ const IngredientsList = ({ recipe }) => {
   const [isProgressRoute, setIsProgressRoute] = useState(false);
   const { isDone, setIsDone } = useContext(RecipesContext);
   const x = location.pathname.includes('comidas') ? 'meals' : 'cocktails';
+  const isInProgress = location.pathname.includes('in-progress');
 
   useEffect(() => {
     const inProgress = location.pathname.includes('in-progress');
@@ -25,14 +27,16 @@ const IngredientsList = ({ recipe }) => {
 
   useEffect(() => {
     checkIngredients(x, []);
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
-    || false;
-    const checkedDrinkOrMealExists = inProgressRecipes
-     !== undefined;
-    const drinkOrMealExists = inProgressRecipes[x][id] !== undefined;
-    if (inProgressRecipes
-      && drinkOrMealExists
-      && checkedDrinkOrMealExists) setIsDone(...inProgressRecipes[x][id]);
+    teste(setIsDone, x, id);
+    // PARA REDUZIR A COMPLEXIDADE TRANSFERIMOS OS COMANDOS ABAIXO PARA A FUNÇÃO TESTE
+    // const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'))
+    // || false;
+    // const checkedDrinkOrMealExists = inProgressRecipes
+    //  !== undefined;
+    // const drinkOrMealExists = inProgressRecipes[x][id] !== undefined;
+    // if (inProgressRecipes
+    //   && drinkOrMealExists
+    //   && checkedDrinkOrMealExists) setIsDone(...inProgressRecipes[x][id]);
   }, [id, setIsDone, x]);
 
   const handleChange = ({ target }) => {
@@ -47,37 +51,62 @@ const IngredientsList = ({ recipe }) => {
     const favoritedRecipe = { [id]: [completedIngredients] };
     checkIngredients(x, favoritedRecipe);
   };
+
+  const ingredientListWithCheckbox = () => (
+    <ul>
+      {ingredientsList.map((item, index) => (
+        <li
+          key={ index }
+          data-testid={ isProgressRoute
+            ? `${index}-ingredient-step`
+            : `${index}-ingredient-name-and-measure` }
+        >
+          <label
+            htmlFor={ `${index}-ingredient` }
+            className={ isDone[`checkbox${index}`] && 'line-through' }
+          >
+            <input
+              type="checkbox"
+              key={ index }
+              name={ `checkbox${index}` }
+              id={ `${index}-ingredient` }
+              onChange={ handleChange }
+              value={ isDone[`checkbox${index}`] || false }
+              checked={ isDone[`checkbox${index}`] || false }
+            />
+            <span style={ { fontSize: '13px' } }>
+              {`${item}: ${measuresList[index]}`}
+            </span>
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+
+  const ingredientList = () => (
+    <ul>
+      {ingredientsList.map((item, index) => (
+        <li
+          key={ index }
+          data-testid={ isProgressRoute
+            ? `${index}-ingredient-step`
+            : `${index}-ingredient-name-and-measure` }
+        >
+          <label
+            htmlFor={ `${index}-ingredient` }
+          >
+            <span style={ { fontSize: '13px' } }>
+              {`${item}: ${measuresList[index]}`}
+            </span>
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <div>
-      <ul>
-        {ingredientsList.map((item, index) => (
-          <li
-            key={ index }
-            data-testid={ isProgressRoute
-              ? `${index}-ingredient-step`
-              : `${index}-ingredient-name-and-measure` }
-          >
-            <label
-              htmlFor={ `${index}-ingredient` }
-              className={ isDone[`checkbox${index}`] && 'line-through' }
-            >
-              <input
-                type="checkbox"
-                key={ index }
-                name={ `checkbox${index}` }
-                id={ `${index}-ingredient` }
-                onChange={ handleChange }
-                value={ isDone[`checkbox${index}`] || false }
-                checked={ isDone[`checkbox${index}`] || false }
-                // data-testid={ `${index}-ingredient-step` }
-              />
-              <span style={ { fontSize: '13px' } }>
-                {`${item}: ${measuresList[index]}`}
-              </span>
-            </label>
-          </li>
-        ))}
-      </ul>
+      {isInProgress ? ingredientListWithCheckbox() : ingredientList()}
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 
-function ComidasFeitas() {
+function ReceitasFeitas() {
   const [completedRecipes, setCompletedRecipes] = useState([]);
 
   useEffect(() => {
@@ -123,4 +123,4 @@ function ComidasFeitas() {
   );
 }
 
-export default ComidasFeitas;
+export default ReceitasFeitas;
