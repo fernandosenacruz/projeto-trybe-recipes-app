@@ -51,7 +51,8 @@ function BebidasDetalhes(props) {
   }
 
   const { strDrinkThumb: imgSrc,
-    strDrink: name, strAlcoholic, strInstructions, strCategory: category } = recipe;
+    strDrink: name, strAlcoholic,
+    strInstructions, strCategory: category } = recipe;
 
   return (
     <div className="card">
