@@ -98,7 +98,16 @@ function ComidasProcesso() {
             type="button"
             className="btn"
             onClick={ () => {
-              const icon = favoriteRecipe(recipeFav);
+              const obj = {
+                id: idMeal,
+                type: 'comida',
+                area: strArea,
+                category: strCategory,
+                alcoholicOrNot: '',
+                name: strMeal,
+                image: strMealThumb,
+              };
+              const icon = favoriteRecipe(obj);
               setLink(icon);
             } }
             src={ link }

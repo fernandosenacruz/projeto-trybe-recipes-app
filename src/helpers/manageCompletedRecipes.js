@@ -9,6 +9,7 @@
 //   alcoholicOrNot:
 //   name:
 //   image:
+//   tags:
 // };
 
 const manageCompletedRecipes = (operation, recipe) => {
