@@ -8,6 +8,7 @@ import favoriteRecipe from '../helpers/favoriteRecipe';
 import IngredientsList from '../components/IngredientsList';
 import changeButtonStatus from '../helpers/changeButtonStatus';
 import RecipesContext from '../context/RecipesContext';
+import manageCompletedRecipes from '../helpers/manageCompletedRecipes';
 
 function ComidasProcesso() {
   const [recipeInProgress, setRecipeInProgress] = useState({});
@@ -18,12 +19,23 @@ function ComidasProcesso() {
     strMealThumb,
     strArea,
     idMeal,
+    strTags,
   } = recipeInProgress;
   const location = useLocation();
   const [link, setLink] = useState();
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { isDone } = useContext(RecipesContext);
   const history = useHistory();
+  let recipeFav = {
+    id: idMeal,
+    type: 'comida',
+    area: strArea,
+    category: strCategory,
+    alcoholicOrNot: '',
+    name: strMeal,
+    image: strMealThumb,
+    tags: strTags ? strTags.split(',').slice(0, 2) : [],
+  };
 
   useEffect(() => {
     const id = location.pathname.split('/')[2];
@@ -42,6 +54,18 @@ function ComidasProcesso() {
   }, [location.pathname]);
   useEffect(() => setIsButtonDisabled(changeButtonStatus(isDone, recipeInProgress)),
     [isDone, recipeInProgress]);
+
+  function recipeDone() {
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2, '0');
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const doneDate = `${day}/${month}/${today.getFullYear()}`;
+    if (!recipeFav.doneDate) {
+      recipeFav = { ...recipeFav, doneDate };
+    }
+    manageCompletedRecipes('add', recipeFav);
+    history.push('/receitas-feitas');
+  }
 
   return (
     <div className="card">
@@ -74,16 +98,7 @@ function ComidasProcesso() {
             type="button"
             className="btn"
             onClick={ () => {
-              const obj = {
-                id: idMeal,
-                type: 'comida',
-                area: strArea,
-                category: strCategory,
-                alcoholicOrNot: '',
-                name: strMeal,
-                image: strMealThumb,
-              };
-              const icon = favoriteRecipe(obj);
+              const icon = favoriteRecipe(recipeFav);
               setLink(icon);
             } }
             src={ link }
@@ -106,7 +121,7 @@ function ComidasProcesso() {
               type="submit"
               className="btn btn-primary btn-sm fixed-bottom w-100"
               disabled={ !isButtonDisabled }
-              onClick={ () => history.push('/receitas-feitas') }
+              onClick={ recipeDone }
             >
               Finalizar Receita
             </button>
