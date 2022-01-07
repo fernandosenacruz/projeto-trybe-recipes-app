@@ -98,7 +98,16 @@ function BebidasProcesso() {
             type="button"
             className="btn"
             onClick={ () => {
-              const icon = favoriteRecipe(recipeFav);
+              const obj = {
+                id: idDrink,
+                type: 'bebida',
+                area: '',
+                category: strCategory,
+                alcoholicOrNot: strAlcoholic,
+                name: strDrink,
+                image: strDrinkThumb,
+              };
+              const icon = favoriteRecipe(obj);
               setLink(icon);
             } }
             src={ link }
