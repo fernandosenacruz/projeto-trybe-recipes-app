@@ -96,14 +96,13 @@ function ComidasFeitas() {
           </div>
           <div
             className="mt-3"
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
           >
             <button
-              data-testid="share-btn"
+              data-testid={ `${index}-horizontal-share-btn` }
               type="button"
               onClick={ () => shareRecipe(recipes.id, recipes.type) }
               className="btn"
+              src={ shareIcon }
             >
               <img src={ shareIcon } alt="heart icon" />
             </button>
