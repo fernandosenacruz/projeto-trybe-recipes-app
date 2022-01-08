@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import getRandomID from '../helpers/surpriseMe';
+import surpriseMe from '../helpers/surpriseMe';
 
 function ExplorarComidas() {
   const history = useHistory();
@@ -27,10 +27,10 @@ function ExplorarComidas() {
         <button
           type="button"
           data-testid="explore-surprise"
-          onClick={ () => {
-            const id = getRandomID('comidas');
+          onClick={ async () => {
+            const id = await surpriseMe('comidas');
             console.log(id);
-            history.push(`/comidas/:${id}`);
+            history.push(`/comidas/${id}`);
           } }
         >
           Me Surpreenda!
