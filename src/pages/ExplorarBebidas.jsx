@@ -22,7 +22,6 @@ function ExplorarBebidas() {
           data-testid="explore-surprise"
           onClick={ async () => {
             const id = await surpriseMe('bebidas');
-            console.log(id);
             history.push(`/bebidas/${id}`);
           } }
         >

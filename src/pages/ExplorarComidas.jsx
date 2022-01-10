@@ -29,7 +29,6 @@ function ExplorarComidas() {
           data-testid="explore-surprise"
           onClick={ async () => {
             const id = await surpriseMe('comidas');
-            console.log(id);
             history.push(`/comidas/${id}`);
           } }
         >

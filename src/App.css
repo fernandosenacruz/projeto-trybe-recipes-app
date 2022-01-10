@@ -23,6 +23,15 @@ h4 {
   width: 95%;
 }
 
+.input-rounded {
+  border-radius: 3px 10px;
+}
+
+.img-git {
+  height: 40px;
+  width: 35px;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;

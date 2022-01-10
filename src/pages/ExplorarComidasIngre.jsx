@@ -9,8 +9,6 @@ import {
 
 function ExplorarComidasIngre() {
   const { setRecipeList } = useContext(RecipesContext);
-  // const history = useHistory();
-  // const [isLoading, setIsLoading] = useState(true);
   const [ingredients, setIngredients] = useState([{
     name: 'Sem dados',
     img: '',
@@ -19,18 +17,15 @@ function ExplorarComidasIngre() {
   useEffect(() => {
     const allFetchs = async () => {
       const ingredientsName = await fecthIngredientName('comida');
-      const ingredientsIMG = await fecthIngredientIMG(ingredientsName);
+      const ingredientsIMG = await fecthIngredientIMG(ingredientsName, 'comida');
       const arr = ingredientsName.map((ingredient, index) => ({
         name: ingredient,
         img: ingredientsIMG[index],
       }));
       setIngredients(arr);
-      // setIsLoading(false);
     };
     allFetchs();
   }, []);
-
-  // if (isLoading) return <p>Loading</p>;
 
   return (
     <>
@@ -39,7 +34,9 @@ function ExplorarComidasIngre() {
         {ingredients.map(({ name, img, index }) => (
           <Link
             to="/comidas"
-            onClick={ () => setRecipeList(fetchRecipesByIngredient(name, 'comida')) }
+            onClick={ async () => setRecipeList(
+              await fetchRecipesByIngredient(name, 'comida'),
+            ) }
             key={ name + index }
           >
             <div
@@ -62,7 +59,7 @@ function ExplorarComidasIngre() {
                 {/* <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={ () => history.push() }
+                  onClick={ () =>main-group-18-ajustes-css history.push() }
                 >
                   Ver Receitas
                 </button> */}

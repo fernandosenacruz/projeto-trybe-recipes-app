@@ -11,14 +11,8 @@ const surpriseMe = async (string) => {
     }
     return data.drinks[0].idDrink;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
-// const getRandomID = (string) => {
-//   let id;
-//   surpriseMe();
-//   console.log(id);
-//   return id;
-// };
 
 export default surpriseMe;

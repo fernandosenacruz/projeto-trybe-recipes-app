@@ -1,6 +1,5 @@
 const mealOrCocktail = (string) => {
   let mealsOrCocktails = '';
-  console.log(string);
   if (string === 'comida') {
     mealsOrCocktails = 'meal';
   } else {
@@ -9,11 +8,10 @@ const mealOrCocktail = (string) => {
   return mealsOrCocktails;
 };
 
-export const fecthIngredientName = async (ingredient, string) => {
+export const fecthIngredientName = async (ingredient) => {
   const MAX_INGREDIENTS = 12;
   let ingredients;
-  const response = await (await fetch(`https://www.the${mealOrCocktail(string)}db.com/api/json/v1/1/list.php?i=list`)).json();
-  console.log(response);
+  const response = await (await fetch(`https://www.the${mealOrCocktail(ingredient)}db.com/api/json/v1/1/list.php?i=list`)).json();
   if (ingredient === 'comida') {
     ingredients = response.meals
       .filter((_, index) => index < MAX_INGREDIENTS)
