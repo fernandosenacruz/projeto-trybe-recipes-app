@@ -72,7 +72,6 @@ function ComidasDetalhes(props) {
           {strCategory}
         </span>
         <div className="mt-3 mb-1">
-
           <button
             data-testid="share-btn"
             type="button"

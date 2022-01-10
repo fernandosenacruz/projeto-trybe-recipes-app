@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 
 function RecipeCard({ recipe, index, recomend }) {
+  // const location = useLocation();
+  // const ARRAY_LENGTH = 3;
   const NOT_FOUND = -1;
   const type = Object.keys(recipe)[0].indexOf('Meal') !== NOT_FOUND ? 'Meal' : 'Drink';
   const route = type === 'Meal' ? 'comidas' : 'bebidas';
+  // const isDetailsRoute = location.pathname.split('/').length === ARRAY_LENGTH;
   const id = `id${type}`;
   let dataTestId = '';
   if (recomend) {
@@ -17,7 +20,7 @@ function RecipeCard({ recipe, index, recomend }) {
   return (
     <div
       data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
-      className={ `col-6 ${index >= 2 ? 'd-none' : ' '}` }
+      className={ `col-6 ${index >= 2 ? ' ' : ' d-none'} ` }
     >
       <Link to={ `/${route}/${recipe[id]}` }>
         <h4 data-testid={ dataTestId }>{recipe[`str${type}`]}</h4>
@@ -25,7 +28,7 @@ function RecipeCard({ recipe, index, recomend }) {
           src={ recipe[`str${type}Thumb`] }
           alt={ `foto da receita ${recipe[`str${type}`]}` }
           data-testid={ `${index}-card-img` }
-          className="card-img img-fluid d-block"
+          className="card-img img-fluid d-block mx-auto"
         />
       </Link>
     </div>

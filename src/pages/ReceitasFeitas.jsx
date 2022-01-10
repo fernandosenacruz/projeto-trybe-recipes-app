@@ -39,85 +39,94 @@ function ReceitasFeitas() {
       <Header name="Receitas Feitas" show="false" />
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-all-btn"
         onClick={ clearFilters }
       >
         All
-
       </button>
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-food-btn"
         onClick={ filterFood }
       >
         Food
-
       </button>
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-drink-btn"
         onClick={ filterDrinks }
       >
         Drinks
-
       </button>
       {completedRecipes.map((recipes, index) => (
-        <div key={ index }>
+        <div key={ index } className="card">
           <Link to={ `/${recipes.type}s/${recipes.id}` }>
-            <img
-              src={ recipes.image }
-              alt="recipes"
-              data-testid={ `${index}-horizontal-image` }
-              width="10%"
-            />
-          </Link>
-          <div
-            style={ { display: recipes.type === 'comida' ? null : 'none' } }
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { `${recipes.area} - ${recipes.category}` }
-
-          </div>
-          <Link to={ `/${recipes.type}s/${recipes.id}` }>
-            <div data-testid={ `${index}-horizontal-name` }>{ recipes.name }</div>
-          </Link>
-          <div
-            style={ { display: recipes.type === 'bebida' ? null : 'none' } }
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { recipes.alcoholicOrNot }
-
-          </div>
-          <div
-            data-testid={ `${index}-horizontal-done-date` }
-          >
-            { recipes.doneDate }
-
-          </div>
-          <div
-            className="mt-3"
-          >
-            <button
-              data-testid={ `${index}-horizontal-share-btn` }
-              type="button"
-              onClick={ () => shareRecipe(recipes.id, recipes.type) }
-              className="btn"
-              src={ shareIcon }
-            >
-              <img src={ shareIcon } alt="heart icon" />
-            </button>
-          </div>
-          {recipes.tags.map((tag) => (
-            <div
-              key={ `${tag}-${index}` }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
+            <div className="text-center">
+              <img
+                className="img-done mx-auto"
+                src={ recipes.image }
+                alt="recipes"
+                data-testid={ `${index}-horizontal-image` }
+                // width="10%"
+              />
             </div>
-          ))}
+          </Link>
+          <div className="card-body">
+            <div
+              style={ { display: recipes.type === 'comida' ? null : 'none' } }
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { `${recipes.area} - ${recipes.category}` }
 
+            </div>
+            <Link to={ `/${recipes.type}s/${recipes.id}` }>
+              <h5
+                className="card-title"
+                data-testid={ `${index}-horizontal-name` }
+              >
+                { recipes.name }
+              </h5>
+              {recipes.tags.map((tag) => (
+                <span
+                  className="badge rounded-pill bg-info text-dark"
+                  key={ `${tag}-${index}` }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {tag}
+                </span>
+              ))}
+              {/* <div
+              className="mt-3"
+            > */}
+              <button
+                data-testid={ `${index}-horizontal-share-btn` }
+                type="button"
+                onClick={ () => shareRecipe(recipes.id, recipes.type) }
+                className="btn"
+                src={ shareIcon }
+              >
+                <img src={ shareIcon } alt="heart icon" />
+              </button>
+              {/* </div> */}
+            </Link>
+            <span
+              className="badge rounded-pill bg-info text-dark"
+              style={ { display: recipes.type === 'bebida' ? null : 'none' } }
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { recipes.alcoholicOrNot }
+
+            </span>
+            <div
+              data-testid={ `${index}-horizontal-done-date` }
+            >
+              { recipes.doneDate }
+            </div>
+          </div>
         </div>
-
       ))}
     </div>
   );

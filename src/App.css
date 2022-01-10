@@ -27,9 +27,18 @@ h4 {
   border-radius: 3px 10px;
 }
 
+.low-margin {
+  margin: 0.3%;
+}
+
 .img-git {
   height: 40px;
   width: 35px;
+}
+
+.img-done {
+  height: 100%;
+  width: 95%;
 }
 
 .meals {
@@ -56,13 +65,13 @@ h4 {
   max-height: 80vh;
 }
 
-.header {
+/* .header {
   background-color: rgb(41, 128, 77);
   display: flex;
   justify-content: space-evenly;
-}
+} */
 
-.prof-btn {
+/* .prof-btn {
   background-color: rgb(41, 128, 77);
   border: none;
   cursor: pointer;
@@ -71,9 +80,9 @@ h4 {
 .search-btn {
   background-color: rgb(41, 128, 77);
   border: none;
-}
+} */
 
-.search-input {
+/* .search-input {
   border: none;
   border-radius: 30px;
   height: 30px;
@@ -81,7 +90,7 @@ h4 {
   outline: none;
   padding: 5px;
   width: 250px;
-}
+} */
 
 .start-btn {
   bottom: 0;

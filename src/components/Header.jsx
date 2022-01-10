@@ -22,40 +22,45 @@ function Header({ name, show }) {
 
   return (
     <header className="header d-flex flex-column">
-      <button
-        className="prof-btn"
-        type="button"
-        onClick={ () => history.push('/perfil') }
+      <navbar
+        className="container navbar navbar-expand-lg navbar-dark"
+        style={ { backgroundColor: '#0fa36b' } }
       >
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="imagem do perfil"
-        />
-      </button>
-      <h1 data-testid="page-title">{name}</h1>
-      {!hidden
-        && <input
-          className="search-input"
-          type="text"
-          name=""
-          data-testid="search-input"
-          hidden={ hidden }
-          value={ textToSearch }
-          onChange={ ({ target }) => setTextToSearch(target.value) }
-        />}
-      {!hidden && <SearchBar textToSearch={ textToSearch } />}
-
-      {show === 'true' ? (
         <button
-          className="search-btn"
+          className="prof-btn btn"
           type="button"
-          onClick={ handleClick }
-          data-testid="search-btn"
+          onClick={ () => history.push('/perfil') }
         >
-          <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
+          <img
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="imagem do perfil"
+          />
         </button>
-      ) : undefined}
+        <h1 data-testid="page-title">{name}</h1>
+        {!hidden
+          && <input
+            className="search-input"
+            type="text"
+            name=""
+            data-testid="search-input"
+            hidden={ hidden }
+            value={ textToSearch }
+            onChange={ ({ target }) => setTextToSearch(target.value) }
+          />}
+        {!hidden && <SearchBar textToSearch={ textToSearch } />}
+
+        {show === 'true' ? (
+          <button
+            className="search-btn btn"
+            type="button"
+            onClick={ handleClick }
+            data-testid="search-btn btn"
+          >
+            <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
+          </button>
+        ) : undefined}
+      </navbar>
     </header>
   );
 }
