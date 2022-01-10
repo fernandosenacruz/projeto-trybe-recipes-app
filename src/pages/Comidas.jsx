@@ -63,6 +63,7 @@ function Comidas() {
       >
         All
       </button>
+      {console.log(recipeList)}
       {recipeList.map((recipe, index) => (<RecipeCard
         key={ index }
         recipe={ recipe }
