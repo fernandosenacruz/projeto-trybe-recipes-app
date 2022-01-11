@@ -23,7 +23,8 @@ function Header({ name, show }) {
   return (
     <header className="header d-flex flex-column">
       <navbar
-        className="container navbar navbar-expand-lg navbar-dark"
+        className="container navbar navbar-expand-lg
+        navbar-dark d-flex justify-content-between"
         style={ { backgroundColor: '#0fa36b' } }
       >
         <button
@@ -37,18 +38,7 @@ function Header({ name, show }) {
             alt="imagem do perfil"
           />
         </button>
-        <h1 data-testid="page-title">{name}</h1>
-        {!hidden
-          && <input
-            className="search-input"
-            type="text"
-            name=""
-            data-testid="search-input"
-            hidden={ hidden }
-            value={ textToSearch }
-            onChange={ ({ target }) => setTextToSearch(target.value) }
-          />}
-        {!hidden && <SearchBar textToSearch={ textToSearch } />}
+        <h1 className="mb-0" data-testid="page-title">{name}</h1>
 
         {show === 'true' ? (
           <button
@@ -60,6 +50,17 @@ function Header({ name, show }) {
             <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
           </button>
         ) : undefined}
+        {!hidden
+          && <input
+            className="search-input"
+            type="text"
+            name=""
+            data-testid="search-input"
+            hidden={ hidden }
+            value={ textToSearch }
+            onChange={ ({ target }) => setTextToSearch(target.value) }
+          />}
+        {!hidden && <SearchBar textToSearch={ textToSearch } />}
       </navbar>
     </header>
   );

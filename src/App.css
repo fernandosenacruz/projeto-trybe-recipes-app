@@ -2,16 +2,12 @@
   text-decoration: line-through;
 }
 
-.card-img {
-  height: 60%;
-  width: 60%;
-}
 
 h4 {
   display: inline;
 }
 
-.detail-img, .card-img-top {
+.detail-img {
   height: 30%;
   margin-left: 10%;
   width: 80%;
@@ -40,7 +36,7 @@ h4 {
 
 .img-done {
   height: 100%;
-  width: 95%;
+  width: 100%;
 }
 
 
@@ -58,6 +54,7 @@ h4 {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 .Footer {
@@ -90,15 +87,14 @@ a {
   border: none;
 } */
 
-/* .search-input {
+.search-input {
   border: none;
   border-radius: 30px;
   height: 30px;
-  margin-top: 20px;
   outline: none;
   padding: 5px;
-  width: 250px;
-} */
+  width: 95%;
+}
 
 .start-btn {
   bottom: 0;

@@ -22,14 +22,17 @@ function RecipeCard({ recipe, index, recomend }) {
       data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
       className={ recomend ? `col-6 ${index < 2 ? '' : 'd-none'}` : 'col-6' }
     >
-      <Link to={ `/${route}/${recipe[id]}` }>
-        <h4 data-testid={ dataTestId }>{recipe[`str${type}`]}</h4>
+      <Link to={ `/${route}/${recipe[id]}` } className="card m-1">
         <img
           src={ recipe[`str${type}Thumb`] }
           alt={ `foto da receita ${recipe[`str${type}`]}` }
           data-testid={ `${index}-card-img` }
-          className="card-img img-fluid d-block mx-auto"
+          className="card-img-left"
         />
+        <div className="card-body">
+
+          <h4 data-testid={ dataTestId }>{recipe[`str${type}`]}</h4>
+        </div>
       </Link>
     </div>
   );

@@ -32,16 +32,16 @@ function ExplorarComidasIngre() {
       <Header name="Explorar Ingredientes" show="false" />
       <div className="row">
         {ingredients.map(({ name, img, index }) => (
-          <Link
-            to="/comidas"
-            onClick={ async () => setRecipeList(
-              await fetchRecipesByIngredient(name, 'comida'),
-            ) }
+          <div
+            className="card col-6"
+            data-testid={ `${index}-ingredient-card` }
             key={ name + index }
           >
-            <div
-              className="card col-6"
-              data-testid={ `${index}-ingredient-card` }
+            <Link
+              to="/comidas"
+              onClick={ async () => setRecipeList(
+                await fetchRecipesByIngredient(name, 'comida'),
+              ) }
             >
               <img
                 src={ img }
@@ -64,8 +64,8 @@ function ExplorarComidasIngre() {
                   Ver Receitas
                 </button> */}
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         ))}
       </div>
       <Footer />

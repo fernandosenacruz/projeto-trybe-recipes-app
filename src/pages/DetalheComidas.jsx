@@ -117,7 +117,6 @@ function ComidasDetalhes(props) {
           data-testid="video"
         />
       </div>
-
       <div className="container mb-1">
         <div className="row p-5">
           {recomended.map((recip, index) => (<RecipeCard
