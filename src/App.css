@@ -9,8 +9,7 @@ h4 {
 
 .detail-img {
   height: 30%;
-  margin-left: 10%;
-  width: 80%;
+  width: 90%;
 }
 
 .recipe-video {
@@ -24,6 +23,7 @@ h4 {
 .input-rounded {
   border-radius: 3px 10px;
 }
+
 
 .low-margin {
   margin: 0.3%;
@@ -57,6 +57,10 @@ a {
   color: black;
 }
 
+.control {
+  justify-content: center;
+}
+
 .Footer {
   background-color: #198754;
   bottom: 0;
@@ -80,9 +84,10 @@ a {
   background-color: rgb(41, 128, 77);
   border: none;
   cursor: pointer;
-}
+} */
 
-.search-btn {
+
+/* .search-btn {
   background-color: rgb(41, 128, 77);
   border: none;
 } */
@@ -93,7 +98,7 @@ a {
   height: 30px;
   outline: none;
   padding: 5px;
-  width: 95%;
+  width: 100%;
 }
 
 .start-btn {

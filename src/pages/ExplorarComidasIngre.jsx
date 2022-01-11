@@ -30,7 +30,7 @@ function ExplorarComidasIngre() {
   return (
     <>
       <Header name="Explorar Ingredientes" show="false" />
-      <div className="row">
+      <div className="row card">
         {ingredients.map(({ name, img, index }) => (
           <div
             className="card col-6"
@@ -56,13 +56,7 @@ function ExplorarComidasIngre() {
                 >
                   { name }
                 </h5>
-                {/* <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={ () =>main-group-18-ajustes-css history.push() }
-                >
-                  Ver Receitas
-                </button> */}
+
               </div>
             </Link>
           </div>

@@ -8,9 +8,10 @@ function Explorar() {
   return (
     <>
       <Header name="Explorar" show="false" />
-      <div>
+      <div className="d-flex justify-content-between bg-warning">
         <button
           type="button"
+          className="btn btn-warning btn-sm"
           data-testid="explore-food"
           onClick={ () => history.push('/explorar/comidas') }
         >
@@ -18,6 +19,7 @@ function Explorar() {
         </button>
         <button
           type="button"
+          className="btn btn-warning btn-sm"
           data-testid="explore-drinks"
           onClick={ () => history.push('/explorar/bebidas') }
         >
