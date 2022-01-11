@@ -111,19 +111,15 @@ function ReceitasFavoritas() {
             { recipes.doneDate }
 
           </span>
-          {/* <div
-            className="mt-3"
-          > */}
-            <button
-              data-testid={ `${index}-horizontal-share-btn` }
-              type="button"
-              onClick={ () => shareRecipe(recipes.id, recipes.type) }
-              className="btn"
-              src={ shareIcon }
-            >
-              <img src={ shareIcon } alt="heart icon" />
-            </button>
-          </div>
+          <button
+            data-testid={ `${index}-horizontal-share-btn` }
+            type="button"
+            onClick={ () => shareRecipe(recipes.id, recipes.type) }
+            className="btn"
+            src={ shareIcon }
+          >
+            <img src={ shareIcon } alt="heart icon" />
+          </button>
           <button
             data-testid={ `${index}-horizontal-favorite-btn` }
             type="button"
@@ -138,9 +134,7 @@ function ReceitasFavoritas() {
           >
             <img src={ blackHeart } alt="heart icon" />
           </button>
-
         </div>
-
       ))}
     </>
   );
