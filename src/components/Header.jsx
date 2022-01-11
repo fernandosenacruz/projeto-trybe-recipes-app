@@ -38,6 +38,16 @@ function Header({ name, show }) {
           />
         </button>
         <h1 data-testid="page-title">{name}</h1>
+        {show === 'true' ? (
+          <button
+            className="search-btn btn"
+            type="button"
+            onClick={ handleClick }
+            data-testid="search-btn btn"
+          >
+            <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
+          </button>
+        ) : undefined}
         {!hidden
           && <input
             className="search-input"
@@ -49,17 +59,6 @@ function Header({ name, show }) {
             onChange={ ({ target }) => setTextToSearch(target.value) }
           />}
         {!hidden && <SearchBar textToSearch={ textToSearch } />}
-
-        {show === 'true' ? (
-          <button
-            className="search-btn btn"
-            type="button"
-            onClick={ handleClick }
-            data-testid="search-btn btn"
-          >
-            <img data-testid="search-top-btn" src={ searchIcon } alt="Search" />
-          </button>
-        ) : undefined}
       </navbar>
     </header>
   );

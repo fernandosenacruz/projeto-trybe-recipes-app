@@ -61,8 +61,8 @@ const SearchBar = ({ textToSearch }) => {
 
   return (
     <form onSubmit={ handleSubmit }>
-      <div className="control">
-        <label className="radio" htmlFor="ingredient">
+      <div className="control row">
+        <label className="radio col-auto p-1" htmlFor="ingredient">
           <input
             type="radio"
             name="answer"
@@ -72,7 +72,7 @@ const SearchBar = ({ textToSearch }) => {
           />
           Ingredientes
         </label>
-        <label className="radio" htmlFor="name">
+        <label className="radio col-auto p-1" htmlFor="name">
           <input
             type="radio"
             name="answer"
@@ -82,7 +82,7 @@ const SearchBar = ({ textToSearch }) => {
           />
           Nome
         </label>
-        <label className="radio" htmlFor="firt-letter">
+        <label className="radio col-auto p-1" htmlFor="firt-letter">
           <input
             type="radio"
             name="answer"
@@ -92,7 +92,11 @@ const SearchBar = ({ textToSearch }) => {
           />
           Primeira letra
         </label>
-        <button type="submit" data-testid="exec-search-btn">
+        <button
+          type="submit"
+          className="btn btn-warning text-center"
+          data-testid="exec-search-btn"
+        >
           Pesquisar
         </button>
       </div>

@@ -7,11 +7,12 @@ import surpriseMe from '../helpers/surpriseMe';
 function ExplorarComidas() {
   const history = useHistory();
   return (
-    <div>
+    <>
       <Header name="Explorar Comidas" show="false" />
-      <div>
+      <div className="d-flex justify-content-between bg-warning">
         <button
           type="button"
+          className="btn btn-warning btn-sm"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explorar/comidas/ingredientes') }
         >
@@ -19,6 +20,7 @@ function ExplorarComidas() {
         </button>
         <button
           type="button"
+          className="btn btn-warning btn-sm"
           data-testid="explore-by-area"
           onClick={ () => history.push('/explorar/comidas/area') }
         >
@@ -26,6 +28,7 @@ function ExplorarComidas() {
         </button>
         <button
           type="button"
+          className="btn btn-warning btn-sm"
           data-testid="explore-surprise"
           onClick={ async () => {
             const id = await surpriseMe('comidas');
@@ -36,7 +39,7 @@ function ExplorarComidas() {
         </button>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 
