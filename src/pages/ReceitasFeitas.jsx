@@ -37,30 +37,32 @@ function ReceitasFeitas() {
   return (
     <>
       <Header name="Receitas Feitas" show="false" />
-      <button
-        type="button"
-        className="btn btn-warning btn-sm"
-        data-testid="filter-by-all-btn"
-        onClick={ clearFilters }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        className="btn btn-warning btn-sm"
-        data-testid="filter-by-food-btn"
-        onClick={ filterFood }
-      >
-        Food
-      </button>
-      <button
-        type="button"
-        className="btn btn-warning btn-sm"
-        data-testid="filter-by-drink-btn"
-        onClick={ filterDrinks }
-      >
-        Drinks
-      </button>
+      <div className="d-flex justify-content-between bg-warning">
+        <button
+          type="button"
+          className="btn btn-warning btn-sm"
+          data-testid="filter-by-all-btn"
+          onClick={ clearFilters }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          className="btn btn-warning btn-sm"
+          data-testid="filter-by-food-btn"
+          onClick={ filterFood }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          className="btn btn-warning btn-sm"
+          data-testid="filter-by-drink-btn"
+          onClick={ filterDrinks }
+        >
+          Drinks
+        </button>
+      </div>
       {completedRecipes.map((recipes, index) => (
         <div key={ index } className="card">
           <Link to={ `/${recipes.type}s/${recipes.id}` }>
@@ -98,9 +100,6 @@ function ReceitasFeitas() {
                   {tag}
                 </span>
               ))}
-              {/* <div
-              className="mt-3"
-            > */}
               <button
                 className="btn"
                 data-testid={ `${index}-horizontal-share-btn` }
@@ -110,7 +109,6 @@ function ReceitasFeitas() {
               >
                 <img src={ shareIcon } alt="heart icon" />
               </button>
-              {/* </div> */}
             </Link>
             <span
               className="badge rounded-pill bg-info text-dark"
