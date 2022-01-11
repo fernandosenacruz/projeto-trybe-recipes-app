@@ -35,7 +35,7 @@ function ReceitasFeitas() {
   };
 
   return (
-    <div>
+    <>
       <Header name="Receitas Feitas" show="false" />
       <button
         type="button"
@@ -123,12 +123,14 @@ function ReceitasFeitas() {
             <div
               data-testid={ `${index}-horizontal-done-date` }
             >
+              Feito em:
+              {' '}
               { recipes.doneDate }
             </div>
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 }
 

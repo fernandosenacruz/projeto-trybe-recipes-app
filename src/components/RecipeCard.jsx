@@ -20,7 +20,7 @@ function RecipeCard({ recipe, index, recomend }) {
   return (
     <div
       data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
-      className={ `col-6 ${index >= 2 ? ' ' : ' d-none'} ` }
+      className={ recomend ? `col-6 ${index < 2 ? '' : 'd-none'}` : 'col-6' }
     >
       <Link to={ `/${route}/${recipe[id]}` }>
         <h4 data-testid={ dataTestId }>{recipe[`str${type}`]}</h4>

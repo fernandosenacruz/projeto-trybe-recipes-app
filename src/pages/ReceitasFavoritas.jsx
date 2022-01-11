@@ -37,10 +37,11 @@ function ReceitasFavoritas() {
   };
 
   return (
-    <div>
+    <>
       <Header name="Receitas Favoritas" show="false" />
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-all-btn"
         onClick={ clearFilters }
       >
@@ -49,6 +50,7 @@ function ReceitasFavoritas() {
       </button>
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-food-btn"
         onClick={ filterFood }
       >
@@ -57,6 +59,7 @@ function ReceitasFavoritas() {
       </button>
       <button
         type="button"
+        className="btn btn-warning btn-sm"
         data-testid="filter-by-drink-btn"
         onClick={ filterDrinks }
       >
@@ -64,16 +67,20 @@ function ReceitasFavoritas() {
 
       </button>
       {favouritedRecipes.map((recipes, index) => (
-        <div key={ index }>
+        <div key={ index } className="card">
           <Link to={ `/${recipes.type}s/${recipes.id}` }>
-            <img
-              src={ recipes.image }
-              alt="recipes"
-              data-testid={ `${index}-horizontal-image` }
-              width="10%"
-            />
+            <div className="text-center">
+              <img
+                className="img-done mx-auto"
+                src={ recipes.image }
+                alt="recipes"
+                data-testid={ `${index}-horizontal-image` }
+                // width="10%"
+              />
+            </div>
           </Link>
           <div
+            className="card-body"
             style={ { display: recipes.type === 'comida' ? null : 'none' } }
             data-testid={ `${index}-horizontal-top-text` }
           >
@@ -81,24 +88,32 @@ function ReceitasFavoritas() {
 
           </div>
           <Link to={ `/${recipes.type}s/${recipes.id}` }>
-            <div data-testid={ `${index}-horizontal-name` }>{ recipes.name }</div>
+            <hh5
+              className="card-title"
+              data-testid={ `${index}-horizontal-name` }
+            >
+              { recipes.name }
+
+            </hh5>
           </Link>
-          <div
+          <span
+            className="badge rounded-pill bg-info text-dark"
             style={ { display: recipes.type === 'bebida' ? null : 'none' } }
             data-testid={ `${index}-horizontal-top-text` }
           >
             { recipes.alcoholicOrNot }
 
-          </div>
-          <div
+          </span>
+          <span
+            className="badge rounded-pill bg-info text-dark"
             data-testid={ `${index}-horizontal-done-date` }
           >
             { recipes.doneDate }
 
-          </div>
-          <div
+          </span>
+          {/* <div
             className="mt-3"
-          >
+          > */}
             <button
               data-testid={ `${index}-horizontal-share-btn` }
               type="button"
@@ -127,7 +142,7 @@ function ReceitasFavoritas() {
         </div>
 
       ))}
-    </div>
+    </>
   );
 }
 

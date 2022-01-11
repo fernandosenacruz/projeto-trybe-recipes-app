@@ -18,7 +18,9 @@ h4 {
 }
 
 .recipe-video {
-  height: 30%;
+  height: 20%;
+  margin-bottom: 10%;
+  margin-left: 2.5%;
   padding: 2%;
   width: 95%;
 }
@@ -41,6 +43,7 @@ h4 {
   width: 95%;
 }
 
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -54,10 +57,11 @@ h4 {
 }
 
 .Footer {
+  background-color: #198754;
   bottom: 0;
   position: fixed;
   text-align: center;
-  width: 90%;
+  width: 100%;
 }
 
 .rocksGlass {

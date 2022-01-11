@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import xandroGitHub from '../images/xandroGitHub.jpeg';
 import fatGitHub from '../images/fatGitHub.jpeg';
+import elielsonGitHub from '../images/elielsonGitHub.jpeg';
+import kelvinGitHub from '../images/kelvinGitHub.jpeg';
 
 function Login() {
   const [email, userEmail] = useState('');
@@ -38,11 +40,11 @@ function Login() {
         </div>
         <div className="col-6">
           <img
-            src={ fatGitHub }
+            src={ elielsonGitHub }
             alt=""
             className="img-git rounded-circle img-responsive"
           />
-          <h6 className="text-muted">elielson</h6>
+          <h6 className="text-muted">elielsondev</h6>
         </div>
       </div>
       <div className="row text-center">
@@ -56,11 +58,11 @@ function Login() {
         </div>
         <div className="col-6">
           <img
-            src={ fatGitHub }
+            src={ kelvinGitHub }
             alt=""
             className="img-git rounded-circle img-responsive"
           />
-          <h6 className="text-muted">kelvin</h6>
+          <h6 className="text-muted">KelvinPichinini</h6>
         </div>
       </div>
       <form className="form-signin  p-3 text-center">

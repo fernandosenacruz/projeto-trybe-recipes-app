@@ -20,21 +20,36 @@ function Perfil() {
   return (
     <>
       <Header name="Perfil" show="false" />
-      <div data-testid="profile-email">{user}</div>
-      <Link to="/receitas-feitas" data-testid="profile-done-btn">
-        Receitas Feitas
-      </Link>
-      <Link to="/receitas-favoritas" data-testid="profile-favorite-btn">
-        Receitas Favoritas
-      </Link>
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ logout }
-      >
-        Sair
-
-      </button>
+      <div className="d-flex flex-column">
+        <h3
+          className="text-center"
+          data-testid="profile-email"
+        >
+          {user}
+        </h3>
+        <Link
+          to="/receitas-feitas"
+          data-testid="profile-done-btn"
+          className="btn btn-warning"
+        >
+          Receitas Feitas
+        </Link>
+        <Link
+          to="/receitas-favoritas"
+          data-testid="profile-favorite-btn"
+          className="btn btn-warning"
+        >
+          Receitas Favoritas
+        </Link>
+        <button
+          type="button"
+          className="btn btn-danger"
+          data-testid="profile-logout-btn"
+          onClick={ logout }
+        >
+          Sair
+        </button>
+      </div>
       <Footer />
     </>
   );
