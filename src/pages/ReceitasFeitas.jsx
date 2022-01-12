@@ -37,97 +37,100 @@ function ReceitasFeitas() {
   return (
     <>
       <Header name="Receitas Feitas" show="false" />
-      <div className="d-flex justify-content-between bg-warning">
-        <button
-          type="button"
-          className="btn btn-warning btn-sm"
-          data-testid="filter-by-all-btn"
-          onClick={ clearFilters }
-        >
-          All
-        </button>
-        <button
-          type="button"
-          className="btn btn-warning btn-sm"
-          data-testid="filter-by-food-btn"
-          onClick={ filterFood }
-        >
-          Food
-        </button>
-        <button
-          type="button"
-          className="btn btn-warning btn-sm"
-          data-testid="filter-by-drink-btn"
-          onClick={ filterDrinks }
-        >
-          Drinks
-        </button>
-      </div>
-      {completedRecipes.map((recipes, index) => (
-        <div key={ index } className="card">
-          <Link to={ `/${recipes.type}s/${recipes.id}` }>
-            <div className="text-center">
-              <img
-                className="img-done mx-auto"
-                src={ recipes.image }
-                alt="recipes"
-                data-testid={ `${index}-horizontal-image` }
-                // width="10%"
-              />
-            </div>
-          </Link>
-          <div className="card-body">
-            <div
-              style={ { display: recipes.type === 'comida' ? null : 'none' } }
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              { `${recipes.area} - ${recipes.category}` }
+      <div className="main-page">
 
-            </div>
+        <div className="d-flex justify-content-around">
+          <button
+            type="button"
+            className="btn btn-inf btn-sm"
+            data-testid="filter-by-all-btn"
+            onClick={ clearFilters }
+          >
+            All
+          </button>
+          <button
+            type="button"
+            className="btn btn-inf btn-sm"
+            data-testid="filter-by-food-btn"
+            onClick={ filterFood }
+          >
+            Food
+          </button>
+          <button
+            type="button"
+            className="btn btn-inf btn-sm"
+            data-testid="filter-by-drink-btn"
+            onClick={ filterDrinks }
+          >
+            Drinks
+          </button>
+        </div>
+        {completedRecipes.map((recipes, index) => (
+          <div key={ index } className="card">
             <Link to={ `/${recipes.type}s/${recipes.id}` }>
-              <h5
-                className="card-title"
-                data-testid={ `${index}-horizontal-name` }
-              >
-                { recipes.name }
-              </h5>
-              {recipes.tags.map((tag) => (
-                <span
-                  className="badge rounded-pill bg-info text-dark"
-                  key={ `${tag}-${index}` }
-                  data-testid={ `${index}-${tag}-horizontal-tag` }
-                >
-                  {tag}
-                </span>
-              ))}
-              <button
-                className="btn"
-                data-testid={ `${index}-horizontal-share-btn` }
-                type="button"
-                onClick={ () => shareRecipe(recipes.id, recipes.type) }
-                src={ shareIcon }
-              >
-                <img src={ shareIcon } alt="heart icon" />
-              </button>
+              <div className="text-center">
+                <img
+                  className="img-done mx-auto"
+                  src={ recipes.image }
+                  alt="recipes"
+                  data-testid={ `${index}-horizontal-image` }
+                // width="10%"
+                />
+              </div>
             </Link>
-            <span
-              className="badge rounded-pill bg-info text-dark"
-              style={ { display: recipes.type === 'bebida' ? null : 'none' } }
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              { recipes.alcoholicOrNot }
+            <div className="card-body">
+              <div
+                style={ { display: recipes.type === 'comida' ? null : 'none' } }
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                { `${recipes.area} - ${recipes.category}` }
 
-            </span>
-            <div
-              data-testid={ `${index}-horizontal-done-date` }
-            >
-              Feito em:
-              {' '}
-              { recipes.doneDate }
+              </div>
+              <Link to={ `/${recipes.type}s/${recipes.id}` }>
+                <h5
+                  className="card-title"
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  { recipes.name }
+                </h5>
+                {recipes.tags.map((tag) => (
+                  <span
+                    className="badge rounded-pill bg-info text-dark"
+                    key={ `${tag}-${index}` }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <button
+                  className="btn"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  type="button"
+                  onClick={ () => shareRecipe(recipes.id, recipes.type) }
+                  src={ shareIcon }
+                >
+                  <img src={ shareIcon } alt="heart icon" />
+                </button>
+              </Link>
+              <span
+                className="badge rounded-pill bg-info text-dark"
+                style={ { display: recipes.type === 'bebida' ? null : 'none' } }
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                { recipes.alcoholicOrNot }
+
+              </span>
+              <div
+                data-testid={ `${index}-horizontal-done-date` }
+              >
+                Feito em:
+                {' '}
+                { recipes.doneDate }
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </>
   );
 }

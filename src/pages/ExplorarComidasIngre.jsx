@@ -30,8 +30,8 @@ function ExplorarComidasIngre() {
   return (
     <>
       <Header name="Explorar Ingredientes" show="false" />
-      <div className="row card">
-        {ingredients.map(({ name, img, index }) => (
+      <div className="d-flex flex-row flex-wrap card">
+        {ingredients.map(({ name, img }, index) => (
           <div
             className="card col-6"
             data-testid={ `${index}-ingredient-card` }

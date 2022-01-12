@@ -12,13 +12,13 @@ function Comidas() {
   const categoryEndpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const { recipeList, setRecipeList } = useContext(RecipesContext);
   const [categories, setCategories] = useState([]);
-  const [filtered, setFiltered] = useState('');
+  const [filtered, setFiltered] = useState('All');
 
-  async function filterByCategory(category) {
+  async function filterByCategory(event, category) {
     let filterEndPoint = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
     if (filtered === category || category === 'All') {
       filterEndPoint = recipesEndpoint;
-      setFiltered('');
+      setFiltered('All');
     } else {
       setFiltered(category);
     }
@@ -42,16 +42,18 @@ function Comidas() {
   }, [setRecipeList, recipeList]);
 
   return (
-    <div>
+    <div className="main-page">
       <Header name="Comidas" show="true" />
       {categories.map((cat, index) => (
         <span key={ index + cat.strCategory } className="low-margin">
           <button
             type="button"
-            className="btn btn-warning btn-sm"
+            className={ cat.strCategory === filtered
+              ? 'btn btn-filter btn-sm selected' : 'btn btn-filter btn-sm' }
             data-testid={ `${cat.strCategory} -category-filter` }
-            onClick={ () => filterByCategory(cat.strCategory) }
+            onClick={ (event) => filterByCategory(event, cat.strCategory) }
           >
+
             {cat.strCategory}
           </button>
         </span>
@@ -59,10 +61,11 @@ function Comidas() {
       <button
         key="all"
         type="button"
-        className="btn btn-warning btn-sm low-margin"
+        className={ filtered === 'All'
+          ? 'btn btn-filter btn-sm selected' : 'btn btn-filter btn-sm' }
         data-testid="All-category-filter"
         name="All"
-        onClick={ () => filterByCategory('All') }
+        onClick={ (event) => filterByCategory(event, 'All') }
       >
         All
       </button>

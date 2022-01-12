@@ -63,22 +63,16 @@ function ComidasDetalhes(props) {
         data-testid="recipe-photo"
         className="detail-img rounded"
       />
-      <div className="card-body">
-        <h5 data-testid="recipe-title" className="card-title">{name}</h5>
-        <span
-          data-testid="recipe-category"
-          className="badge rounded-pill bg-info text-dark"
-        >
-          {strCategory}
-        </span>
-        <div className="mt-3 mb-1">
+      <div className="card-body d-flex row">
+        <span className="mt-3 mb-1 d-flex col">
+          <h1 data-testid="recipe-title" className="card-title">{name}</h1>
           <button
             data-testid="share-btn"
             type="button"
             onClick={ () => shareRecipe(location) }
             className="btn"
           >
-            <img src={ shareIcon } alt="heart icon" />
+            <img className="social-btn" src={ shareIcon } alt="heart icon" />
           </button>
           <button
             data-testid="favorite-btn"
@@ -99,11 +93,18 @@ function ComidasDetalhes(props) {
             } }
             src={ link }
           >
-            <img src={ link } alt="heart icon" />
+            <img className="social-btn" src={ link } alt="heart icon" />
           </button>
-        </div>
-
+        </span>
+        <span
+          data-testid="recipe-category"
+          className="badge rounded-pill bg-info text-dark mb-4"
+        >
+          {strCategory}
+        </span>
+        <h3>Ingredients List: </h3>
         <IngredientsList recipe={ recipe } />
+        <h3>Instructions: </h3>
         <p
           data-testid="instructions"
           className="card-text p-3 text-justify"
@@ -119,6 +120,7 @@ function ComidasDetalhes(props) {
       </div>
       <div className="container mb-1">
         <div className="row p-5">
+          <h4>Recommended for you: </h4>
           {recomended.map((recip, index) => (<RecipeCard
             key={ index }
             recipe={ recip }

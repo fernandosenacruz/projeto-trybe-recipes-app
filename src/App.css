@@ -1,5 +1,48 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: #c3ede1;
+}
+
 .line-through {
   text-decoration: line-through;
+}
+
+.login-title {
+  background-color: #c3ede1;
+}
+
+.object-cover{
+  object-fit: cover;
+  height: 225px;
+  width: 100%;
+}
+
+.btn-login {
+  background-color: #f29f4d;
+  border-color: black;
+  border-width: 2px;  
+  
+}
+
+.btn-inf {
+  background-color: #c3ede1;
+  border-color: black;
+  border-width: 2px;
+}
+
+.btn-filter {
+  background-color: #9cbeb4;
+  border-color: black;
+  border-width: 2px;
+}
+
+.selected{
+  background-color: #c3ede1;
+  border-bottom: none;
 }
 
 
@@ -9,7 +52,7 @@ h4 {
 
 .detail-img {
   height: 30%;
-  width: 90%;
+  width: 100%;
 }
 
 .recipe-video {
@@ -39,10 +82,9 @@ h4 {
   width: 100%;
 }
 
-
 .meals {
   align-items: center;
-  background: #0fa36b;
+  background: #c3ede1;
   color: #464646;
   display: flex;
   flex-direction: column;
@@ -50,6 +92,11 @@ h4 {
   height: 100vh;
   justify-content: center;
   width: 100%;
+}
+
+.social-btn {
+  height: 20px;
+  margin-bottom: 7px;
 }
 
 a {
@@ -62,11 +109,9 @@ a {
 }
 
 .Footer {
-  background-color: #198754;
-  bottom: 0;
-  position: fixed;
-  text-align: center;
+  background-color: #c3ede1;
   width: 100%;
+  padding-right: 20px;
 }
 
 .rocksGlass {

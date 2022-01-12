@@ -9,10 +9,10 @@ function ExplorarComidas() {
   return (
     <>
       <Header name="Explorar Comidas" show="false" />
-      <div className="d-flex justify-content-between bg-warning">
+      <div className="d-flex flex-column justify-content-between main-page">
         <button
           type="button"
-          className="btn btn-warning btn-sm"
+          className="btn btn-inf btn-sm mt-4 mb-4 me-2 ms-2"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push('/explorar/comidas/ingredientes') }
         >
@@ -20,7 +20,7 @@ function ExplorarComidas() {
         </button>
         <button
           type="button"
-          className="btn btn-warning btn-sm"
+          className="btn btn-inf btn-sm mt-4 mb-4 me-2 ms-2"
           data-testid="explore-by-area"
           onClick={ () => history.push('/explorar/comidas/area') }
         >
@@ -28,7 +28,7 @@ function ExplorarComidas() {
         </button>
         <button
           type="button"
-          className="btn btn-warning btn-sm"
+          className="btn btn-inf btn-sm mt-4 mb-4 me-2 ms-2"
           data-testid="explore-surprise"
           onClick={ async () => {
             const id = await surpriseMe('comidas');

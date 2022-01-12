@@ -8,10 +8,10 @@ function Explorar() {
   return (
     <>
       <Header name="Explorar" show="false" />
-      <div className="d-flex justify-content-between bg-warning">
+      <div className="d-flex flex-column justify-content-between main-page">
         <button
           type="button"
-          className="btn btn-warning btn-sm"
+          className="btn btn-inf btn-sm mt-4 mb-4 me-2 ms-2"
           data-testid="explore-food"
           onClick={ () => history.push('/explorar/comidas') }
         >
@@ -19,7 +19,7 @@ function Explorar() {
         </button>
         <button
           type="button"
-          className="btn btn-warning btn-sm"
+          className="btn btn-inf btn-sm mt-4 mb-4 me-2 ms-2"
           data-testid="explore-drinks"
           onClick={ () => history.push('/explorar/bebidas') }
         >

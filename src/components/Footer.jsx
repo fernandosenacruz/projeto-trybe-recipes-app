@@ -8,10 +8,13 @@ function Footer() {
   const history = useHistory();
 
   return (
-    <footer className="Footer d-flex justify-content-between" data-testid="footer">
+    <footer
+      className="Footer d-flex justify-content-between fixed-bottom"
+      data-testid="footer"
+    >
       <button
         type="button"
-        className="btn btn-success"
+        className="btn"
         onClick={ () => history.push('/bebidas') }
       >
         <img
@@ -23,7 +26,7 @@ function Footer() {
 
       <button
         type="button"
-        className="btn btn-success"
+        className="btn "
         onClick={ () => history.push('/explorar') }
       >
         <img
@@ -35,7 +38,7 @@ function Footer() {
 
       <button
         type="button"
-        className="btn btn-success"
+        className="btn"
         onClick={ () => history.push('/comidas') }
       >
         <img

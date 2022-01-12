@@ -9,7 +9,7 @@ function ExplorarBebidas() {
   return (
     <>
       <Header name="Explorar Bebidas" show="false" />
-      <div className="d-flex justify-content-between bg-warning">
+      <div className="d-flex justify-content-between bg-warning main-page">
         <button
           type="button"
           className="btn btn-warning btn-sm"

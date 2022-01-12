@@ -25,7 +25,7 @@ function Header({ name, show }) {
       <navbar
         className="container navbar navbar-expand-lg
         navbar-dark d-flex justify-content-between"
-        style={ { backgroundColor: '#0fa36b' } }
+        style={ { backgroundColor: '#c3ede1' } }
       >
         <button
           className="prof-btn btn"

@@ -20,7 +20,7 @@ function Perfil() {
   return (
     <>
       <Header name="Perfil" show="false" />
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column flex-fill main-page">
         <h3
           className="text-center"
           data-testid="profile-email"
@@ -30,14 +30,14 @@ function Perfil() {
         <Link
           to="/receitas-feitas"
           data-testid="profile-done-btn"
-          className="btn btn-warning"
+          className="btn btn-inf"
         >
           Receitas Feitas
         </Link>
         <Link
           to="/receitas-favoritas"
           data-testid="profile-favorite-btn"
-          className="btn btn-warning"
+          className="btn btn-inf"
         >
           Receitas Favoritas
         </Link>

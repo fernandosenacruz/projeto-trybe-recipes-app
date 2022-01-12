@@ -22,12 +22,12 @@ function RecipeCard({ recipe, index, recomend }) {
       data-testid={ recomend ? `${index}-recomendation-card` : `${index}-recipe-card` }
       className={ recomend ? `col-6 ${index < 2 ? '' : 'd-none'}` : 'col-6' }
     >
-      <Link to={ `/${route}/${recipe[id]}` } className="card m-1">
+      <Link to={ `/${route}/${recipe[id]}` } className="card m-1 shadow rounded-5">
         <img
           src={ recipe[`str${type}Thumb`] }
           alt={ `foto da receita ${recipe[`str${type}`]}` }
           data-testid={ `${index}-card-img` }
-          className="card-img-left"
+          className="card-img "
         />
         <div className="card-body">
 
